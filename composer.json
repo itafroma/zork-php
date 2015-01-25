@@ -1,0 +1,38 @@
+{
+    "name": "Zork PHP",
+    "description": "Port of MIT's version of Zork from the original MDL source.",
+    "keywords": ["game", "Zork", "MDL"],
+    "homepage": "http://marktrapp.com/projects/zork",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Tim Anderson",
+            "role": "Original implementor"
+        },
+        {
+            "name": "Marc Blank",
+            "homepage": "http://www.infocom-if.org/authors/blank.html",
+            "role": "Original implementor"
+        },
+        {
+            "name": "Bruce Daniels",
+            "role": "Original implementor"
+        },
+        {
+            "name": "Dave Lebling",
+            "homepage": "http://www.infocom-if.org/authors/lebling.html",
+            "role": "Original implementor"
+        },
+        {
+            "name": "Mark Trapp",
+            "email": "mark@marktrapp.com",
+            "homepage": "http://marktrapp.com",
+            "role": "Porter"
+        }
+    ],
+    "support": {
+        "email": "mark@marktrapp.com",
+        "issues": "https://github.com/itafroma/zork/issues",
+        "source": "https://github.com/itafroma/zork"
+    }
+}
