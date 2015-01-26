@@ -75,10 +75,10 @@ function psetg($foo, $bar) {
  * In the original source, there's a hard limit of 36 flag that can be added to
  * the flag field, presumably done for memory conservation.
  *
- * @param array $fs A list of flags to add.
+ * @param string ... $fs A list of flags to add.
  * @return int The number of flags added.
  */
-function flagword(array $fs) {
+function flagword(...$fs) {
     $tot = 1;
     $cnt = 1;
 
