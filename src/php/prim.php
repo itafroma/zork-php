@@ -10,6 +10,9 @@
  *    trigger_error().
  *  - It's unknown what the GROUP_GLUE symbol is in the oblist. It appears to be
  *    always empty.
+ *  - <NEWSTRUC> has been removed entirely and calls to it are replaced with
+ *    class declarations. It was used to emulate a C-like struct that's not
+ *    necessary given PHP's weak typing (and the existence of classes).
  */
 
 namespace Itafroma\Zork;
@@ -17,6 +20,7 @@ namespace Itafroma\Zork;
 use Itafroma\Zork\Exception\ConstantAlreadyDefinedException;
 use Itafroma\Zork\Exception\FlagwordException;
 use Itafroma\Zork\Exception\PsetgDuplicateException;
+use \BadFunctionCallException;
 
 /**
  * Defines a global constant, throwing an exception if it's already set.
@@ -92,4 +96,8 @@ function flagword(array $fs) {
     });
 
     return $cnt;
+}
+
+function newstruc($nam, $prim, ...$elem) {
+    throw new BadFunctionCallException('newstruc() has been removed: use classes instead.');
 }
