@@ -34,5 +34,15 @@
         "email": "mark@marktrapp.com",
         "issues": "https://github.com/itafroma/zork/issues",
         "source": "https://github.com/itafroma/zork"
-    }
+    },
+    "autoload": {
+        "psr-4": {
+            "Itafroma\\Zork\\": "src/"
+        },
+        "files": [
+            "src/php/prim.php"        ]
+    },
+    "bin": [
+        "bin/zork.php"
+    ]
 }
