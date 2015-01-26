@@ -22,7 +22,7 @@ use Itafroma\Zork\Exception\PsetgDuplicateException;
  * Defines a global constant, throwing an exception if it's already set.
  *
  * Effectively elevates PHP's built-in E_NOTICE on redefining constants to
- * an exception.
+ * an exception and adds the constant to PHP's list of global variables.
  *
  * @param string $foo The constant name to set.
  * @param mixed  $bar The value to set $foo to.
@@ -33,6 +33,7 @@ function msetg($foo, $bar) {
         throw new ConstantAlreadyDefinedException();
     }
 
+    $GLOBALS[$foo] = $bar;
     define($foo, $bar);
 }
 
