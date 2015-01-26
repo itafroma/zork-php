@@ -82,6 +82,9 @@ function flagword(...$fs) {
     $tot = 1;
     $cnt = 1;
 
+    // Given <FLAGWORD>'s usage in the rest of the original source, this could
+    // be simplified to a simple foreach loop. The use of array_walk_recursive()
+    // here is to emulate the use of MDL's <MAPF> SUBR in the original source.
     array_walk_recursive($fs, function($f) {
         if (!isset($GLOBALS['OBLIST']['GROUP_GLUE'])) {
             msetg($f, $tot);
