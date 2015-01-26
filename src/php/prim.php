@@ -67,8 +67,8 @@ function psetg($foo, $bar) {
 /**
  * Adds a word to the global list of flagwords.
  *
- * There is a limit of 36 flagwords in the initial code, presumably for memory
- * conservation.
+ * In the original source, there's a hard limit of 36 words that can be added at
+ * one time, presumably for memory conservation.
  *
  * @param array $fs A list of words to add.
  * @return int The number of words added.
