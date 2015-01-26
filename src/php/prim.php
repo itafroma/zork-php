@@ -4,15 +4,12 @@
  * @file
  * Primitive functions.
  *
- * Implementation notes:
+ * Overall implementation notes:
  *  - $GLOBALS is used over the global keyword to prevent name collisions.
  *  - Exceptions are closer to MDL's <ERROR> behavior and are used instead of
  *    trigger_error().
  *  - It's unknown what the GROUP_GLUE symbol is in the oblist. It appears to be
  *    always empty.
- *  - <NEWSTRUC> has been removed entirely and calls to it are replaced with
- *    class declarations. It was used to emulate a C-like struct that's not
- *    necessary given PHP's weak typing (and the existence of classes).
  */
 
 namespace Itafroma\Zork;
@@ -77,6 +74,7 @@ function psetg($foo, $bar) {
  *
  * @param string ... $fs A list of flags to add.
  * @return int The number of flags added.
+ * @throws Itafroma\Zork\Exception\FlagwordException
  */
 function flagword(...$fs) {
     $tot = 1;
@@ -101,6 +99,20 @@ function flagword(...$fs) {
     return $cnt;
 }
 
+/**
+ * Generates a new structure.
+ *
+ * This function is intentionally left unimplemented. The purpose of it was to
+ * emulate C's struct language feature. In PHP, struct emulation is done through
+ * simple class declarations using public properties.
+ *
+ * @param string    $nam  The name of the structure.
+ * @param string    $prim The underlying type of the structure.
+ * @param mixed ... $elem A series of elements defining the structure,
+ *                        alternating between the element name and the element
+ *                        type.
+ * @throws \BadFunctionCallException
+ */
 function newstruc($nam, $prim, ...$elem) {
     throw new BadFunctionCallException('newstruc() has been removed: use classes instead.');
 }
