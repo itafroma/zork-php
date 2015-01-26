@@ -1,5 +1,5 @@
 {
-    "name": "Zork PHP",
+    "name": "itafroma/zork",
     "description": "Port of MIT's version of Zork from the original MDL source.",
     "keywords": ["game", "Zork", "MDL"],
     "homepage": "http://marktrapp.com/projects/zork",
