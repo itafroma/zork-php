@@ -120,7 +120,7 @@ function flagword(...$fs) {
  * @throws \BadFunctionCallException
  */
 function newstruc($nam, $prim, ...$elem) {
-    throw new BadFunctionCallException('newstruc() has been removed: implement Itafroma\Prim\Newstruc instead.');
+    throw new BadFunctionCallException('newstruc() has been removed: implement Itafroma\Zork\Prim\Newstruc instead.');
 }
 
 $zork['SLOTS'] = [];
