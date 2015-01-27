@@ -138,6 +138,7 @@ $zork['SLOTS'] = [];
  *
  * @param string $name The name of the slot to define.
  * @param mixed  $def  The default value of the slot defined.
+ * @throws Itafroma\Zork|Exception\SlotNameAlreadyUsedException;
  */
 function make_slot($name, $def) {
     global $zork;
