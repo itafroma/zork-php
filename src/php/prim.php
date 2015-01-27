@@ -5,11 +5,8 @@
  * Primitive functions.
  *
  * Overall implementation notes:
- *  - $GLOBALS is used over the global keyword to prevent name collisions.
  *  - Exceptions are closer to MDL's <ERROR> behavior and are used instead of
  *    trigger_error().
- *  - It's unknown what the GROUP_GLUE symbol is in the oblist. It appears to be
- *    always empty.
  */
 
 namespace Itafroma\Zork;
@@ -22,20 +19,21 @@ use \BadFunctionCallException;
 /**
  * Defines a global constant, throwing an exception if it's already set.
  *
- * Effectively elevates PHP's built-in E_NOTICE on redefining constants to
- * an exception and adds the constant to PHP's list of global variables.
+ * Effectively acts like a declare(), but elevates PHP's built-in E_NOTICE on
+ * redefining constants to an exception.
  *
  * @param string $foo The constant name to set.
  * @param mixed  $bar The value to set $foo to.
  * @throws Itafroma\Zork\Exception\ConstantAlreadyDefinedException
  */
 function msetg($foo, $bar) {
-    if (!defined($foo) && $bar !== constant($foo)) {
+    global $zork;
+
+    if (isset($zork[$foo]) && $bar !== constant($foo)) {
         throw new ConstantAlreadyDefinedException();
     }
 
-    $GLOBALS[$foo] = $bar;
-    define($foo, $bar);
+    $zork[$foo] = $bar;
 }
 
 /**
@@ -47,19 +45,21 @@ function msetg($foo, $bar) {
  * @throws Itafroma\Zork\Exception\PsetgDuplicateException
  */
 function psetg($foo, $bar) {
+    global $zork;
+
     $pl = [];
-    $GLOBALS[$foo] = $bar;
+    $zork[$foo] = $bar;
 
-    if (!isset($GLOBALS['PURE_LIST'])) {
-        $GLOBALS['PURE_LIST'] = [];
+    if (!isset($zork['PURE_LIST'])) {
+        $zork['PURE_LIST'] = [];
     }
-    $pl = $GLOBALS['PURE_LIST'];
+    $pl = $zork['PURE_LIST'];
 
-    if (!in_array($GLOBALS[$foo], $pl)) {
-        $pl = array_merge($GLOBALS[$foo], $pl);
-        $GLOBALS['PURE_LIST'] = $pl;
+    if (!in_array($zork[$foo], $pl)) {
+        $pl = array_merge($zork[$foo], $pl);
+        $zork['PURE_LIST'] = $pl;
     }
-    elseif (defined('PURE_CAREFUL') && PURE_CAREFUL) {
+    elseif (!empty($zork['PURE_CAREFUL'])) {
         throw new PsetgDuplicateException();
     }
 
@@ -77,6 +77,8 @@ function psetg($foo, $bar) {
  * @throws Itafroma\Zork\Exception\FlagwordException
  */
 function flagword(...$fs) {
+    global $zork;
+
     $tot = 1;
     $cnt = 1;
 
@@ -84,7 +86,9 @@ function flagword(...$fs) {
     // be simplified to a simple foreach loop. The use of array_walk_recursive()
     // here is to emulate the use of MDL's <MAPF> SUBR in the original source.
     array_walk_recursive($fs, function($f) {
-        if (!isset($GLOBALS['OBLIST']['GROUP_GLUE'])) {
+        // It's unknown what the GROUP_GLUE symbol is in the oblist. It appears
+        // to be always empty.
+        if (!isset($zork['OBLIST']['GROUP_GLUE'])) {
             msetg($f, $tot);
         }
 
