@@ -97,7 +97,7 @@ function flagword(...$fs) {
         $tot *= 2;
 
         $cnt++;
-        if($cnt > 36) {
+        if ($cnt > 36) {
             throw new FlagwordException();
         }
     });
