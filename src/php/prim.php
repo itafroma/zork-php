@@ -132,7 +132,7 @@ $zork['SLOTS'] = [];
  * called "funny slots" yet.
  *
  * Usage:
- *  - Create: makeslot('foo', 'default value');
+ *  - Create: make_slot('foo', 'default value');
  *  - Read: $GLOBALS['zork']['foo']($object);
  *  - Update: $GLOBALS['zork']['foo']($object, 'new value');
  *
