@@ -14,6 +14,8 @@ namespace Itafroma\Zork;
 use Itafroma\Zork\Exception\ConstantAlreadyDefinedException;
 use Itafroma\Zork\Exception\FlagwordException;
 use Itafroma\Zork\Exception\PsetgDuplicateException;
+use Itafroma\Zork\Exception\SlotNameAlreadyUsedException;
+use Itafroma\Zork\Prim\Newstruc;
 use \BadFunctionCallException;
 
 /**
@@ -119,4 +121,41 @@ function flagword(...$fs) {
  */
 function newstruc($nam, $prim, ...$elem) {
     throw new BadFunctionCallException('newstruc() has been removed: implement Itafroma\Prim\Newstruc instead.');
+}
+
+$zork['SLOTS'] = [];
+
+/**
+ * "Define a funny slot in an object." (sic)
+ *
+ * Essentially adds arbitrary named properties to objects. Not sure why they're
+ * called "funny slots" yet.
+ *
+ * Usage:
+ *  - Create: makeslot('foo', 'default value');
+ *  - Read: $GLOBALS['zork']['foo']($object);
+ *  - Update: $GLOBALS['zork']['foo']($object, 'new value');
+ *
+ * @param string $name The name of the slot to define.
+ * @param mixed  $def  The default value of the slot defined.
+ */
+function make_slot($name, $def) {
+    global $zork;
+
+    // Slot names can only be used once globally.
+    // REDEFINE is apparently a local variable in the original <DEFINE> and is
+    // never bound.
+    if (!isset($zork[$name]) || !empty($redefine)) {
+        throw new SlotNameAlreadyUsedException();
+    }
+
+    $slot_eval = function (Newstruc $obj, $val = null) use ($name, $def) {
+        if (isset($val)) {
+            return oput($obj, $name, $val);
+        }
+
+        return oget($obj, $name) ?: $def;
+    };
+
+    $zork['SLOTS'] = array_merge($slot_eval, $zork['SLOTS']);
 }
