@@ -150,13 +150,11 @@ function make_slot($name, $def) {
         throw new SlotNameAlreadyUsedException();
     }
 
-    $slot_eval = function (Newstruc $obj, $val = null) use ($name, $def) {
+    $zork['SLOTS'][$name] = function (Newstruc $obj, $val = null) use ($name, $def) {
         if (isset($val)) {
             return oput($obj, $name, $val);
         }
 
         return oget($obj, $name) ?: $def;
     };
-
-    $zork['SLOTS'] = array_merge($slot_eval, $zork['SLOTS']);
 }
