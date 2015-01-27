@@ -40,7 +40,9 @@
             "Itafroma\\Zork\\": "src/"
         },
         "files": [
-            "src/php/prim.php"        ]
+            "src/php/defs.php",
+            "src/php/prim.php"
+        ]
     },
     "bin": [
         "bin/zork.php"
