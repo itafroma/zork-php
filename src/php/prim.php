@@ -118,5 +118,5 @@ function flagword(...$fs) {
  * @throws \BadFunctionCallException
  */
 function newstruc($nam, $prim, ...$elem) {
-    throw new BadFunctionCallException('newstruc() has been removed: use classes instead.');
+    throw new BadFunctionCallException('newstruc() has been removed: implement Itafroma\Prim\Newstruc instead.');
 }
