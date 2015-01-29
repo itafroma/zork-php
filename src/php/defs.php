@@ -8,6 +8,28 @@
 use Itafroma\Defs\Object;
 use Itafroma\Prim\Newstruc;
 
+// Slots for room
+make_slot('RVAL', 0);
+
+// Value for entering
+make_slot('RGLOBAL', $star_bits);
+
+// Globals for room
+flagword(...[
+    'RSEENBIT',   // Visited?
+    'RLIGHTBIT',  // Endogenous light source?
+    'RLANDBIT',   // On land
+    'RWATERBIT',  // Water room
+    'RAIRBIT',    // Mid-air room
+    'RSACREDBIT', // Thief not allowed
+    'RFILLBIT',   // Can fill bottle here
+    'RMUNGBIT',   // Room has been munged
+    'RBUCKBIT',   // This room is a bucket
+    'RHOUSEBIT',  // This room is part of the house
+    'RENDGAME',   // This room is in the end game
+    'RNWALLBIT',  // This room doesn't have walls
+]);
+
 /**
  * Retrieves an object property.
  *
@@ -42,3 +64,5 @@ function oput(Newstruc $o, $p, $x, $add = false) {
 
     return $o;
 }
+
+$rooms = [];
