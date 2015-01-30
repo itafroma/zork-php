@@ -10,6 +10,7 @@ namespace Itafroma\Zork\Tests;
 use Itafroma\Zork\Exception\ConstantAlreadyDefinedException;
 use \PHPUnit_Framework_TestCase;
 use function Itafroma\Zork\msetg;
+use function Itafroma\Zork\newstruc;
 
 class PrimTest extends PHPUnit_Framework_TestCase
 {
@@ -32,5 +33,15 @@ class PrimTest extends PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Itafroma\Zork\Exception\ConstantAlreadyDefinedException');
         msetg('foo', 'baz');
+    }
+
+    /**
+     * Test \Itafroma\Zork\newstruc().
+     *
+     * @expectedException \BadFunctionCallException
+     */
+    public function testNewstruc()
+    {
+        newstruc('foo', 'bar', ...['one', 'two', 'three']);
     }
 }
