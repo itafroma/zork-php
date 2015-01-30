@@ -35,6 +35,9 @@
         "issues": "https://github.com/itafroma/zork/issues",
         "source": "https://github.com/itafroma/zork"
     },
+    "require-dev": {
+        "phpunit/phpunit": "4.4.*"
+    },
     "autoload": {
         "psr-4": {
             "Itafroma\\Zork\\": "src/php"
@@ -43,6 +46,11 @@
             "src/php/prim.php",
             "src/php/defs.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Itafroma\\Zork\\Tests\\": "tests/php"
+        }
     },
     "bin": [
         "bin/zork.php"

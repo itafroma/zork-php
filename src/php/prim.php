@@ -31,7 +31,7 @@ use \BadFunctionCallException;
 function msetg($foo, $bar) {
     global $zork;
 
-    if (isset($zork[$foo]) && $bar !== constant($foo)) {
+    if (isset($zork[$foo]) && $bar !== $zork[$foo]) {
         throw new ConstantAlreadyDefinedException();
     }
 
