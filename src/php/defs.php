@@ -5,8 +5,9 @@
  * Defines.
  */
 
-use Itafroma\Defs\Object;
-use Itafroma\Prim\Struc;
+use Itafroma\Zork\Defs\Object;
+use Itafroma\Zork\Prim\Struc;
+use function Itafroma\Zork\make_slot;
 
 // Generalized oflags tester
 

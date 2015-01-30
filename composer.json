@@ -37,11 +37,11 @@
     },
     "autoload": {
         "psr-4": {
-            "Itafroma\\Zork\\": "src/"
+            "Itafroma\\Zork\\": "src/php"
         },
         "files": [
-            "src/php/defs.php",
-            "src/php/prim.php"
+            "src/php/prim.php",
+            "src/php/defs.php"
         ]
     },
     "bin": [
