@@ -2,7 +2,7 @@
 
 /**
  * @file
- * <NEWSTRUC> replacement interface.
+ * <NEWSTRUC> structure replacement interface.
  *
  * <NEWSTRUC> is essentially an emulation of C's struct, something PHP does
  * via a class with public properties. This interface enables hinting for
@@ -13,6 +13,6 @@
 
 namespace Itafroma\Zork\Prim;
 
-interface Newstruc
+interface Struc
 {
 }

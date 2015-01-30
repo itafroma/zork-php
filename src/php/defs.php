@@ -6,7 +6,7 @@
  */
 
 use Itafroma\Defs\Object;
-use Itafroma\Prim\Newstruc;
+use Itafroma\Prim\Struc;
 
 // Generalized oflags tester
 
@@ -99,11 +99,11 @@ flagword(...[
 /**
  * Retrieves an object property.
  *
- * @param Newstruc $o The object to access.
- * @param mixed $p The property to retrieve.
+ * @param Itafroma\Zork\Prim\Struc $o The object to access.
+ * @param mixed                    $p The property to retrieve.
  * @return mixed The property value.
  */
-function oget(Newstruc $o, $p) {
+function oget(Struc $o, $p) {
     $v = ($o instanceof Object) ?  $o->oprops : $o->rprops;
 
     if (empty($v)) {
@@ -116,11 +116,11 @@ function oget(Newstruc $o, $p) {
 /**
  * Sets an object property.
  *
- * @param Newstruc $o The object to modify.
- * @param mixed $p The property to modify.
- * @param mixed $x The value to set.
+ * @param Itafroma\Zork\Prim\Struc $o The object to modify.
+ * @param mixed                    $p The property to modify.
+ * @param mixed                    $x The value to set.
  */
-function oput(Newstruc $o, $p, $x, $add = false) {
+function oput(Struc $o, $p, $x, $add = false) {
     if ($o instanceof Object) {
         $o->oprops[$p] = $x;
     }

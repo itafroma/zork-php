@@ -15,7 +15,7 @@ use Itafroma\Zork\Exception\ConstantAlreadyDefinedException;
 use Itafroma\Zork\Exception\FlagwordException;
 use Itafroma\Zork\Exception\PsetgDuplicateException;
 use Itafroma\Zork\Exception\SlotNameAlreadyUsedException;
-use Itafroma\Zork\Prim\Newstruc;
+use Itafroma\Zork\Prim\Struc;
 use \BadFunctionCallException;
 
 /**
@@ -120,7 +120,7 @@ function flagword(...$fs) {
  * @throws \BadFunctionCallException
  */
 function newstruc($nam, $prim, ...$elem) {
-    throw new BadFunctionCallException('newstruc() has been removed: implement Itafroma\Zork\Prim\Newstruc instead.');
+    throw new BadFunctionCallException('newstruc() has been removed: implement Itafroma\Zork\Prim\Struc instead.');
 }
 
 $zork['SLOTS'] = [];
@@ -150,7 +150,7 @@ function make_slot($name, $def) {
         throw new SlotNameAlreadyUsedException();
     }
 
-    $zork['SLOTS'][$name] = function (Newstruc $obj, $val = null) use ($name, $def) {
+    $zork['SLOTS'][$name] = function (Struc $obj, $val = null) use ($name, $def) {
         if (isset($val)) {
             return oput($obj, $name, $val);
         }

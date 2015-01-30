@@ -4,13 +4,13 @@
  * @file
  * Room structure definition.
  *
- * @see Itafroma\Zork\Prim\Newstruc
+ * @see Itafroma\Zork\Prim\Struc
  * @see Itafroma\Zork\newstruc()
  */
 
-use Itafroma\Zork\Prim\Newstruc;
+use Itafroma\Zork\Prim\Struc;
 
-class Room implements Newstruc
+class Room implements Struc
 {
     /** @var string $rid Room ID */
     public $rid;
