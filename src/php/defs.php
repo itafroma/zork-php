@@ -8,6 +8,72 @@
 use Itafroma\Defs\Object;
 use Itafroma\Prim\Newstruc;
 
+// Generalized oflags tester
+
+function trnn($obj, $bit) {
+    return ($bit & $obj->oflags) == 0;
+}
+
+function rtrnn($rm, $bit) {
+    return ($bit & $rm->rbits) == 0;
+}
+
+function gtrnn($rm, $bit) {
+    return ($bit & $rm->rglobal) == 0;
+}
+
+function rtrz($rm, $bit) {
+    $rm->rbits &= ($bit ^ -1);
+
+    return $rm->rbits;
+}
+
+function trc($obj, $bit) {
+    $obj->oflags ^= $bit;
+
+    return $obj->oflags;
+}
+
+function trz($obj, $bit) {
+    $obj->oflags &= ($bit ^ -1);
+
+    return $obj->oflags;
+}
+
+function tro($obj, $bit) {
+    $obj->oflags |= $bit;
+
+    return $obj->oflags;
+}
+
+function rtro($rm, $bit) {
+    $rm->rbits |= $bit;
+
+    return $rm->rbits;
+}
+
+function rtrc($rm, $bit) {
+    $rm->rbits ^= $bit;
+
+    return $rm->rbits;
+}
+
+function atrnn($adv, $bit) {
+    return ($bit & $adv->aflags) == 0;
+}
+
+function atrz($adv, $bit) {
+    $adv->aflags &= ($bit ^ -1);
+
+    return $adv->aflags;
+}
+
+function atro($adv, $bit) {
+    $adv->aflags |= $bit;
+
+    return $adv->aflags;
+}
+
 // Slots for room
 make_slot('RVAL', 0);
 
