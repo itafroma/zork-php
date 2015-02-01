@@ -20,7 +20,11 @@ class PrimTest extends PHPUnit_Framework_TestCase
     {
         global $zork;
 
-        $zork = null;
+        foreach (array_keys($zork) as $key) {
+            if (strpos($key, 'PrimTest-') === 0) {
+                unset($zork[$key]);
+            }
+        }
     }
 
     /**
@@ -30,8 +34,8 @@ class PrimTest extends PHPUnit_Framework_TestCase
     {
         global $zork;
 
-        $this->assertEquals('bar', msetg('foo', 'bar'));
-        $this->assertEquals('bar', $zork['foo']);
+        $this->assertEquals('value', msetg('PrimTest-key', 'value'));
+        $this->assertEquals('value', $zork['PrimTest-key']);
     }
 
     /**
@@ -39,10 +43,10 @@ class PrimTest extends PHPUnit_Framework_TestCase
      */
     public function testMsetgExtantKeySameValue()
     {
-        msetg('foo', 'bar');
+        msetg('PrimTest-key', 'value');
 
         try {
-            msetg('foo', 'bar');
+            msetg('PrimTest-key', 'value');
         }
         catch (ConstantAlreadyDefinedException $e) {
             $this->fail('Itafroma\Zork\Exception\ConstantAlreadyDefinedException should not be thrown when global value is reassigned the same value.');
@@ -58,8 +62,8 @@ class PrimTest extends PHPUnit_Framework_TestCase
     {
         global $zork;
 
-        msetg('foo', 'bar');
-        msetg('foo', 'baz');
+        msetg('PrimTest-key', 'value1');
+        msetg('PrimTest-key', 'value2');
     }
 
     /**
@@ -69,8 +73,8 @@ class PrimTest extends PHPUnit_Framework_TestCase
     {
         global $zork;
 
-        $this->assertEquals('bar', psetg('foo', 'bar'));
-        $this->assertContains('foo', array_keys($zork['PURE_LIST']));
+        $this->assertEquals('value', psetg('PrimTest-key', 'value'));
+        $this->assertContains('PrimTest-key', array_keys($zork['PURE_LIST']));
     }
 
     /**
@@ -80,10 +84,10 @@ class PrimTest extends PHPUnit_Framework_TestCase
     {
         global $zork;
 
-        psetg('foo', 'bar');
+        psetg('PrimTest-key', 'value1');
 
-        $this->assertEquals('baz', psetg('foo', 'baz'));
-        $this->assertContains('foo', array_keys($zork['PURE_LIST']));
+        $this->assertEquals('value2', psetg('PrimTest-key', 'value2'));
+        $this->assertContains('PrimTest-key', array_keys($zork['PURE_LIST']));
     }
 
     /**
@@ -97,8 +101,8 @@ class PrimTest extends PHPUnit_Framework_TestCase
 
         $zork['PURE_CAREFUL'] = true;
 
-        psetg('foo', 'bar');
-        psetg('foo', 'baz');
+        psetg('PrimTest-key', 'value1');
+        psetg('PrimTest-key', 'value2');
     }
 
     /**
@@ -109,7 +113,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
         global $zork;
 
         for ($i = 0; $i < 5; ++$i) {
-            $flags[] = 'flag' . $i;
+            $flags[] = 'PrimTest-flag-' . $i;
         }
 
         $this->assertEquals(6, flagword(...$flags));
@@ -131,7 +135,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
         $zork['OBLIST']['GROUP_GLUE'] = true;
 
         for ($i = 0; $i < 5; ++$i) {
-            $flags[] = 'flag' . $i;
+            $flags[] = 'PrimTest-flag-' . $i;
         }
 
         flagword(...$flags);
@@ -149,7 +153,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     public function testFlagwordOverflow()
     {
         for ($i = 0; $i < 37; ++$i) {
-            $flags[] = 'flag' . $i;
+            $flags[] = 'PrimTest-flag-' . $i;
         }
 
         flagword(...$flags);
@@ -162,6 +166,6 @@ class PrimTest extends PHPUnit_Framework_TestCase
      */
     public function testNewstruc()
     {
-        newstruc('foo', 'bar', ...['one', 'two', 'three']);
+        newstruc('PrimTest-struc', 'PrimTest-type', ...['one', 'two', 'three']);
     }
 }
