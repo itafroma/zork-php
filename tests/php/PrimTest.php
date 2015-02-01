@@ -22,7 +22,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     {
         global $zork;
 
-        msetg('foo', 'bar');
+        $this->assertEquals('bar', msetg('foo', 'bar'));
         $this->assertEquals('bar', $zork['foo']);
     }
 

@@ -36,6 +36,8 @@ function msetg($foo, $bar) {
     }
 
     $zork[$foo] = $bar;
+
+    return $zork[$foo];
 }
 
 /**
