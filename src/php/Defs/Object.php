@@ -8,6 +8,8 @@
  * @see Itafroma\Zork\newstruc()
  */
 
+namespace Itafroma\Zork\Defs;
+
 use Itafroma\Zork\Prim\Struc;
 
 class Object implements Struc
