@@ -9,12 +9,20 @@ namespace Itafroma\Zork\Tests;
 
 use Itafroma\Zork\Exception\ConstantAlreadyDefinedException;
 use \PHPUnit_Framework_TestCase;
+use function Itafroma\Zork\flagword;
 use function Itafroma\Zork\msetg;
 use function Itafroma\Zork\psetg;
 use function Itafroma\Zork\newstruc;
 
 class PrimTest extends PHPUnit_Framework_TestCase
 {
+    public function setUp()
+    {
+        global $zork;
+
+        $zork = null;
+    }
+
     /**
      * Test \Itafroma\Zork\msetg().
      */
@@ -91,6 +99,60 @@ class PrimTest extends PHPUnit_Framework_TestCase
 
         psetg('foo', 'bar');
         psetg('foo', 'baz');
+    }
+
+    /**
+     * Test \Itafroma\Zork\flagword().
+     */
+    public function testFlagword()
+    {
+        global $zork;
+
+        for ($i = 0; $i < 5; ++$i) {
+            $flags[] = 'flag' . $i;
+        }
+
+        $this->assertEquals(6, flagword(...$flags));
+
+        $tot = 1;
+        foreach ($flags as $flag) {
+            $this->assertEquals($tot, $zork[$flag]);
+            $tot *= 2;
+        }
+    }
+
+    /**
+     * Test \Itafroam\Zork\flagword() when GROUP_GLUE flag is set.
+     */
+    public function testFlagwordGroupGlueEnabled()
+    {
+        global $zork;
+
+        $zork['OBLIST']['GROUP_GLUE'] = true;
+
+        for ($i = 0; $i < 5; ++$i) {
+            $flags[] = 'flag' . $i;
+        }
+
+        flagword(...$flags);
+
+        foreach ($flags as $flag) {
+            $this->assertArrayNotHasKey($flag, $zork);
+        }
+    }
+
+    /**
+     * Test \Itafroma\Zork\flagword() with too many flags.
+     *
+     * @expectedException Itafroma\Zork\Exception\FlagwordException
+     */
+    public function testFlagwordOverflow()
+    {
+        for ($i = 0; $i < 37; ++$i) {
+            $flags[] = 'flag' . $i;
+        }
+
+        flagword(...$flags);
     }
 
     /**

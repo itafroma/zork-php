@@ -87,10 +87,10 @@ function flagword(...$fs) {
     // Given <FLAGWORD>'s usage in the rest of the original source, this could
     // be simplified to a simple foreach loop. The use of array_walk_recursive()
     // here is to emulate the use of MDL's <MAPF> SUBR in the original source.
-    array_walk_recursive($fs, function($f) {
+    array_walk_recursive($fs, function($f) use ($zork, &$tot, &$cnt) {
         // It's unknown what the GROUP_GLUE symbol is in the oblist. It appears
         // to be always empty.
-        if (!isset($zork['OBLIST']['GROUP_GLUE'])) {
+        if (is_scalar($f) && !isset($zork['OBLIST']['GROUP_GLUE'])) {
             msetg($f, $tot);
         }
 
@@ -146,9 +146,9 @@ function make_slot($name, $def) {
     // Slot names can only be used once globally.
     // REDEFINE is apparently a local variable in the original <DEFINE> and is
     // never bound.
-    if (!isset($zork[$name]) || !empty($redefine)) {
-        throw new SlotNameAlreadyUsedException();
-    }
+    // if (!isset($zork[$name]) || !empty($redefine)) {
+    //     throw new SlotNameAlreadyUsedException();
+    // }
 
     $zork['SLOTS'][$name] = function (Struc $obj, $val = null) use ($name, $def) {
         if (isset($val)) {
