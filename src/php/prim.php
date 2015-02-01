@@ -55,11 +55,9 @@ function psetg($foo, $bar) {
     if (!isset($zork['PURE_LIST'])) {
         $zork['PURE_LIST'] = [];
     }
-    $pl = $zork['PURE_LIST'];
 
-    if (!in_array($zork[$foo], $pl)) {
-        $pl = array_merge($zork[$foo], $pl);
-        $zork['PURE_LIST'] = $pl;
+    if (!in_array($foo, $zork['PURE_LIST'])) {
+        array_unshift($zork['PURE_LIST'], $foo);
     }
     elseif (!empty($zork['PURE_CAREFUL'])) {
         throw new PsetgDuplicateException();

@@ -10,6 +10,7 @@ namespace Itafroma\Zork\Tests;
 use Itafroma\Zork\Exception\ConstantAlreadyDefinedException;
 use \PHPUnit_Framework_TestCase;
 use function Itafroma\Zork\msetg;
+use function Itafroma\Zork\psetg;
 use function Itafroma\Zork\newstruc;
 
 class PrimTest extends PHPUnit_Framework_TestCase
@@ -33,6 +34,45 @@ class PrimTest extends PHPUnit_Framework_TestCase
 
         $this->setExpectedException('Itafroma\Zork\Exception\ConstantAlreadyDefinedException');
         msetg('foo', 'baz');
+    }
+
+    /**
+     * Test \Itafroma\Zork\psetg().
+     */
+    public function testPsetg()
+    {
+        global $zork;
+
+        $this->assertEquals('bar', psetg('foo', 'bar'));
+        $this->assertContains('foo', array_keys($zork['PURE_LIST']));
+    }
+
+    /**
+     * Test \Itafroma\Zork\psetg() with extant key.
+     */
+    public function testPsetgExtantKey()
+    {
+        global $zork;
+
+        psetg('foo', 'bar');
+
+        $this->assertEquals('baz', psetg('foo', 'baz'));
+        $this->assertContains('foo', array_keys($zork['PURE_LIST']));
+    }
+
+    /**
+     * Test \Itafroma\Zork\psetg() with extant key and PURE_CAREFUL set.
+     *
+     * @expectedException Itafroma\Zork\Exception\PsetgDuplicateException
+     */
+    public function testPsetgExtantKeyWithPureCareful()
+    {
+        global $zork;
+
+        $zork['PURE_CAREFUL'] = true;
+
+        psetg('foo', 'bar');
+        psetg('foo', 'baz');
     }
 
     /**
