@@ -29,7 +29,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\msetg().
+     * Test Itafroma\Zork\msetg().
      */
     public function testMsetg()
     {
@@ -40,7 +40,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\msetg() with extant key using the same value.
+     * Test Itafroma\Zork\msetg() with extant key using the same value.
      */
     public function testMsetgExtantKeySameValue()
     {
@@ -55,7 +55,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\msetg() with extant key using a different value.
+     * Test Itafroma\Zork\msetg() with extant key using a different value.
      *
      * @expectedException Itafroma\Zork\Exception\ConstantAlreadyDefinedException
      */
@@ -68,7 +68,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\psetg().
+     * Test Itafroma\Zork\psetg().
      */
     public function testPsetg()
     {
@@ -79,7 +79,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\psetg() with extant key.
+     * Test Itafroma\Zork\psetg() with extant key.
      */
     public function testPsetgExtantKey()
     {
@@ -92,7 +92,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\psetg() with extant key and PURE_CAREFUL set.
+     * Test Itafroma\Zork\psetg() with extant key and PURE_CAREFUL set.
      *
      * @expectedException Itafroma\Zork\Exception\PsetgDuplicateException
      */
@@ -107,7 +107,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\flagword().
+     * Test Itafroma\Zork\flagword().
      */
     public function testFlagword()
     {
@@ -127,7 +127,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroam\Zork\flagword() when GROUP_GLUE flag is set.
+     * Test Itafroam\Zork\flagword() when GROUP_GLUE flag is set.
      */
     public function testFlagwordGroupGlueEnabled()
     {
@@ -147,7 +147,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\flagword() with too many flags.
+     * Test Itafroma\Zork\flagword() with too many flags.
      *
      * @expectedException Itafroma\Zork\Exception\FlagwordException
      */
@@ -161,7 +161,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\newstruc().
+     * Test Itafroma\Zork\newstruc().
      *
      * @expectedException \BadFunctionCallException
      */
@@ -171,7 +171,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\make_slot() slot creation.
+     * Test Itafroma\Zork\make_slot() slot creation.
      */
     public function testMakeSlotCreate()
     {
@@ -184,9 +184,9 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\make_slot() creation on an already-bound name.
+     * Test Itafroma\Zork\make_slot() creation on an already-bound name.
      *
-     * @expectedException \Itafroma\Zork\Exception\SlotNameAlreadyUsedException
+     * @expectedException Itafroma\Zork\Exception\SlotNameAlreadyUsedException
      */
     public function testMakeSlotCreateDuplicate()
     {
@@ -195,7 +195,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\make_slot() slot write.
+     * Test Itafroma\Zork\make_slot() slot write.
      */
     public function testMakeSlotWrite()
     {
@@ -210,7 +210,7 @@ class PrimTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Test \Itafroma\Zork\make_slot() slot read.
+     * Test Itafroma\Zork\make_slot() slot read.
      */
     public function testMakeSlotRead()
     {
