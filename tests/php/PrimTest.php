@@ -10,6 +10,7 @@ namespace Itafroma\Zork\Tests;
 use Itafroma\Zork\Exception\ConstantAlreadyDefinedException;
 use \PHPUnit_Framework_TestCase;
 use function Itafroma\Zork\flagword;
+use function Itafroma\Zork\make_slot;
 use function Itafroma\Zork\msetg;
 use function Itafroma\Zork\psetg;
 use function Itafroma\Zork\newstruc;
@@ -167,5 +168,58 @@ class PrimTest extends PHPUnit_Framework_TestCase
     public function testNewstruc()
     {
         newstruc('PrimTest-struc', 'PrimTest-type', ...['one', 'two', 'three']);
+    }
+
+    /**
+     * Test \Itafroma\Zork\make_slot() slot creation.
+     */
+    public function testMakeSlotCreate()
+    {
+        global $zork;
+
+        $slot = make_slot('PrimTest-slot', 'value');
+
+        $this->assertInternalType('callable', $slot);
+        $this->assertEquals($slot, $zork['SLOTS']['PrimTest-slot']);
+    }
+
+    /**
+     * Test \Itafroma\Zork\make_slot() creation on an already-bound name.
+     *
+     * @expectedException \Itafroma\Zork\Exception\SlotNameAlreadyUsedException
+     */
+    public function testMakeSlotCreateDuplicate()
+    {
+        msetg('PrimTest-slot', 'value');
+        make_slot('PrimTest-slot', 'value');
+    }
+
+    /**
+     * Test \Itafroma\Zork\make_slot() slot write.
+     */
+    public function testMakeSlotWrite()
+    {
+        $slot = make_slot('PrimTest-slot', 'value');
+        $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
+                     ->getMock();
+
+        $return = $slot($stub, 'value');
+
+        $this->assertEquals($stub, $return);
+        $this->assertEquals('value', $return->oprops['PrimTest-slot']);
+    }
+
+    /**
+     * Test \Itafroma\Zork\make_slot() slot read.
+     */
+    public function testMakeSlotRead()
+    {
+        $slot = make_slot('PrimTest-slot', 'value');
+        $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
+                     ->getMock();
+
+        $slot($stub, 'value');
+
+        $this->assertEquals('value', $slot($stub));
     }
 }

@@ -146,15 +146,17 @@ function make_slot($name, $def) {
     // Slot names can only be used once globally.
     // REDEFINE is apparently a local variable in the original <DEFINE> and is
     // never bound.
-    // if (!isset($zork[$name]) || !empty($redefine)) {
-    //     throw new SlotNameAlreadyUsedException();
-    // }
+    if (!isset($zork[$name]) || !empty($redefine)) {
+        $zork['SLOTS'][$name] = function (Struc $obj, $val = null) use ($name, $def) {
+            if (isset($val)) {
+                return oput($obj, $name, $val);
+            }
 
-    $zork['SLOTS'][$name] = function (Struc $obj, $val = null) use ($name, $def) {
-        if (isset($val)) {
-            return oput($obj, $name, $val);
-        }
+            return oget($obj, $name) ?: $def;
+        };
 
-        return oget($obj, $name) ?: $def;
-    };
+        return $zork['SLOTS'][$name];
+    }
+
+    throw new SlotNameAlreadyUsedException();
 }
