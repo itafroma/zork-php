@@ -23,7 +23,15 @@ class PrimTest extends PHPUnit_Framework_TestCase
         global $zork;
 
         msetg('foo', 'bar');
-        $this->assertEquals($zork['foo'], 'bar');
+        $this->assertEquals('bar', $zork['foo']);
+    }
+
+    /**
+     * Test \Itafroma\Zork\msetg() with extant key using the same value.
+     */
+    public function testMsetgExtantKeySameValue()
+    {
+        msetg('foo', 'bar');
 
         try {
             msetg('foo', 'bar');
@@ -31,8 +39,18 @@ class PrimTest extends PHPUnit_Framework_TestCase
         catch (ConstantAlreadyDefinedException $e) {
             $this->fail('Itafroma\Zork\Exception\ConstantAlreadyDefinedException should not be thrown when global value is reassigned the same value.');
         }
+    }
 
-        $this->setExpectedException('Itafroma\Zork\Exception\ConstantAlreadyDefinedException');
+    /**
+     * Test \Itafroma\Zork\msetg() with extant key using a different value.
+     *
+     * @expectedException Itafroma\Zork\Exception\ConstantAlreadyDefinedException
+     */
+    public function testMsetgExtantKeyDifferentValue()
+    {
+        global $zork;
+
+        msetg('foo', 'bar');
         msetg('foo', 'baz');
     }
 
