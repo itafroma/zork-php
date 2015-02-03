@@ -5,9 +5,14 @@
  * Defines.
  */
 
+namespace Itafroma\Zork;
+
 use Itafroma\Zork\Defs\Object;
 use Itafroma\Zork\Prim\Struc;
+use function Itafroma\Zork\flagword;
 use function Itafroma\Zork\make_slot;
+
+global $zork;
 
 // Generalized oflags tester
 
@@ -79,7 +84,7 @@ function atro($adv, $bit) {
 make_slot('RVAL', 0);
 
 // Value for entering
-make_slot('RGLOBAL', $star_bits);
+make_slot('RGLOBAL', $zork['STAR_BITS']);
 
 // Globals for room
 flagword(...[

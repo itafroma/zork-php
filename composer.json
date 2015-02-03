@@ -44,6 +44,7 @@
         },
         "files": [
             "src/php/prim.php",
+            "src/php/dung.php",
             "src/php/defs.php"
         ]
     },
