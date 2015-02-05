@@ -8,7 +8,9 @@
 namespace Itafroma\Zork;
 
 use Itafroma\Zork\Defs\Object;
+use Itafroma\Zork\Defs\Room;
 use Itafroma\Zork\Prim\Struc;
+use \InvalidArgumentException;
 use function Itafroma\Zork\flagword;
 use function Itafroma\Zork\make_slot;
 
@@ -110,13 +112,17 @@ flagword(...[
  * @return mixed The property value.
  */
 function oget(Struc $o, $p) {
+    if (!($o instanceof Object || $o instanceof Room)) {
+        throw new InvalidArgumentException('$o must be of type Itafroma\Zork\Defs\Object or Itafroma\Zorks\Defs\Room');
+    }
+
     $v = ($o instanceof Object) ?  $o->oprops : $o->rprops;
 
     if (empty($v)) {
-        return [];
+        return null;
     }
 
-    return isset($v[$p]) ? $v[$p] : [];
+    return isset($v[$p]) ? $v[$p] : null;
 }
 
 /**
@@ -126,12 +132,20 @@ function oget(Struc $o, $p) {
  * @param mixed                    $p The property to modify.
  * @param mixed                    $x The value to set.
  */
-function oput(Struc $o, $p, $x, $add = false) {
-    if ($o instanceof Object) {
-        $o->oprops[$p] = $x;
+function oput(Struc $o, $p, $x, $add = true) {
+    if (!($o instanceof Object || $o instanceof Room)) {
+        throw new InvalidArgumentException('$o must be of type Itafroma\Zork\Defs\Object or Itafroma\Zork\Defs\Room');
     }
-    else {
-        $o->rprops[$p] = $x;
+
+    $v = ($o instanceof Object) ? $o->oprops : $o->rprops;
+
+    if ((empty($v) && $add) || isset($v[$p])) {
+        if ($o instanceof Object) {
+            $o->oprops[$p] = $x;
+        }
+        else {
+            $o->rprops[$p] = $x;
+        }
     }
 
     return $o;

@@ -2,6 +2,7 @@
     <testsuites>
         <testsuite name="Zork">
             <file>PrimTest.php</file>
+            <file>DefsTest.php</file>
         </testsuite>
     </testsuites>
 </phpunit>
