@@ -36,5 +36,5 @@ class Room implements Struc
     public $rbits;
 
     /** @var array $rprops Property list */
-    public $oprops = [];
+    public $rprops = [];
 }
