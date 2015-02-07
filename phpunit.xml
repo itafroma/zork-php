@@ -2,7 +2,7 @@
 <phpunit backupGlobals="false" bootstrap="vendor/autoload.php">
     <testsuites>
         <testsuite name="Zork PHP">
-            <directory>tests</file>
+            <directory>tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -50,9 +50,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Itafroma\\Zork\\Tests": "tests/"
+            "Itafroma\\Zork\\Tests\\": "tests/"
         }
-    }
+    },
     "bin": [
         "bin/zork.php"
     ]
