@@ -32,27 +32,27 @@
     ],
     "support": {
         "email": "mark@marktrapp.com",
-        "issues": "https://github.com/itafroma/zork/issues",
-        "source": "https://github.com/itafroma/zork"
+        "issues": "https://github.com/itafroma/zork-php/issues",
+        "source": "https://github.com/itafroma/zork-php"
     },
     "require-dev": {
         "phpunit/phpunit": "4.4.*"
     },
     "autoload": {
         "psr-4": {
-            "Itafroma\\Zork\\": "src/php"
+            "Itafroma\\Zork\\": "src/"
         },
         "files": [
-            "src/php/prim.php",
-            "src/php/dung.php",
-            "src/php/defs.php"
+            "src/prim.php",
+            "src/dung.php",
+            "src/defs.php"
         ]
     },
     "autoload-dev": {
         "psr-4": {
-            "Itafroma\\Zork\\Tests\\": "tests/php"
+            "Itafroma\\Zork\\Tests": "tests/"
         }
-    },
+    }
     "bin": [
         "bin/zork.php"
     ]

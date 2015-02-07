@@ -1,8 +1,0 @@
-<phpunit backupGlobals="false" bootstrap="../../vendor/autoload.php">
-    <testsuites>
-        <testsuite name="Zork">
-            <file>PrimTest.php</file>
-            <file>DefsTest.php</file>
-        </testsuite>
-    </testsuites>
-</phpunit>
