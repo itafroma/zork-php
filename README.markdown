@@ -2,6 +2,8 @@
 
 This repository contains an attempt at porting the text-based adventure game [*Zork*][1] from its [original source code][2] written in the [MIT Design Language][3] (MDL) to PHP.
 
+[![Build Status](https://travis-ci.org/itafroma/zork-php.svg?branch=master)](https://travis-ci.org/itafroma/zork-php)
+
 ## Rationale
 
 You might be wondering, "why do this?" [And you may well ask, "Why climb the highest mountain? Why, ~~35~~ 88 years ago, fly the Atlan—"][4] Okay, the real reason is because *Zork* holds a special place in my heart and I wanted to see if it'd be possible to replicate it in its original form—feature for feature, bug for bug—in modern languages.
