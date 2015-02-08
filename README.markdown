@@ -1,6 +1,6 @@
 # Zork
 
-This repository contains attempts at porting the text-based adventure game [*Zork*][1] from its [original source code][2] written in the [MIT Design Language][3] (MDL).
+This repository contains an attempt at porting the text-based adventure game [*Zork*][1] from its [original source code][2] written in the [MIT Design Language][3] (MDL) to PHP.
 
 ## Rationale
 
