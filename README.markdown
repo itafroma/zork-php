@@ -34,9 +34,9 @@ cd zork
 
 ## Acknowledgments
 
-The original *Zork* was designed and [implemented][5] between 1977 and 1979 by [Tim Anderson][6], [Marc Blank][7], [Bruce Daniels][8], and [Dave Lebling][9] working out of the MIT Laboratory for Computer Science Dynamic Modeling System ([MIT-DMS][10]).
+The original *Zork* was designed and [implemented][8] between 1977 and 1979 by [Tim Anderson][9], [Marc Blank][10], [Bruce Daniels][11], and [Dave Lebling][12] working out of the MIT Laboratory for Computer Science Dynamic Modeling System ([MIT-DMS][13]).
 
-I am using the reference manual *The MDL Programming Language* by S. W. Galley and [Greg Pfister][11] to facilitate the porting process.
+I am using the reference manual *The MDL Programming Language* by S. W. Galley and [Greg Pfister][14] to facilitate the porting process.
 
 ## Copyright and license
 
@@ -50,10 +50,11 @@ Where applicable, the ported source code is copyright © 2015 Mark Trapp. All ri
 [4]: http://er.jsc.nasa.gov/seh/ricetalk.htm "Transcript of JFK's Moon Speech at Rice Stadium in 1962"
 [5]: https://getcomposer.org "Composer website"
 [6]: https://packagist.org "Packagist website"
-[7]: http://en.wikipedia.org/wiki/Implementer_(video_games) "Wikipedia article on implmenters"
-[8]: http://en.wikipedia.org/wiki/Tim_Anderson_(Zork) "Wikipedia article on Tim Anderson"
-[9]: http://www.infocom-if.org/authors/blank.html "Infocom author page on Marc Blank"
-[10]: http://en.wikipedia.org/wiki/Bruce_Daniels "Wikipedia article on Bruce Daniels"
-[11]: http://www.infocom-if.org/authors/lebling.html "Infocom author page on Dave Lebling"
-[12]: http://pdp-10.trailing-edge.com/mit_emacs_170_teco_1220/01/info/mit-dm.txt.html "Information on MIT-DMS"
-[13]: http://perilsofparallel.blogspot.com "Greg Pfister's blog"
+[7]: https://phpunit.de "PHPUnit website"
+[8]: http://en.wikipedia.org/wiki/Implementer_(video_games) "Wikipedia article on implmenters"
+[9]: http://en.wikipedia.org/wiki/Tim_Anderson_(Zork) "Wikipedia article on Tim Anderson"
+[10]: http://www.infocom-if.org/authors/blank.html "Infocom author page on Marc Blank"
+[11]: http://en.wikipedia.org/wiki/Bruce_Daniels "Wikipedia article on Bruce Daniels"
+[12]: http://www.infocom-if.org/authors/lebling.html "Infocom author page on Dave Lebling"
+[13]: http://pdp-10.trailing-edge.com/mit_emacs_170_teco_1220/01/info/mit-dm.txt.html "Information on MIT-DMS"
+[14]: http://perilsofparallel.blogspot.com "Greg Pfister's blog"
