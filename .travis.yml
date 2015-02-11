@@ -14,3 +14,6 @@ before_script:
     - travis_retry composer install --no-interaction --prefer-source --dev
 
 script: ./vendor/bin/phpunit --configuration phpunit.xml.dist
+
+after_script:
+    - ./vendor/bin/coveralls -v

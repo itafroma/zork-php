@@ -1,0 +1,7 @@
+#
+# Coveralls configuration file.
+#
+# More information about Coveralls: https://coveralls.io
+
+coverage_clover: build/logs/coverage/clover.xml
+json_path: build/logs/coverage/coveralls-upload.json

@@ -3,6 +3,7 @@
 This repository contains an attempt at porting the text-based adventure game [*Zork*][1] from its [original source code][2] written in the [MIT Design Language][3] (MDL) to PHP.
 
 [![Build Status](https://travis-ci.org/itafroma/zork-php.svg?branch=master)](https://travis-ci.org/itafroma/zork-php)
+[![Coverage Status](https://coveralls.io/repos/itafroma/zork-php/badge.svg?branch=master)](https://coveralls.io/r/itafroma/zork-php)
 
 ## Rationale
 

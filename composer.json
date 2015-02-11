@@ -36,7 +36,8 @@
         "source": "https://github.com/itafroma/zork-php"
     },
     "require-dev": {
-        "phpunit/phpunit": "4.4.*"
+        "phpunit/phpunit": "4.4.*",
+        "satooshi/php-coveralls": "<=1.0"
     },
     "autoload": {
         "psr-4": {
