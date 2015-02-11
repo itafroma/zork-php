@@ -33,7 +33,7 @@ At this stage of development, there is no working binary, but you can run tests 
 
 ```sh
 cd zork
-./vendor/bin/phpunit
+./vendor/bin/phpunit --configuration phpunit.xml.dist
 ```
 
 ## Acknowledgments
