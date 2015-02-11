@@ -6,6 +6,7 @@
         </testsuite>
     </testsuites>
     <logging>
+        <log type="coverage-html" target="build/logs/coverage/html"/>
         <log type="coverage-clover" target="build/logs/coverage/clover.xml"/>
     </logging>
 </phpunit>
