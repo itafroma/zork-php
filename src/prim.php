@@ -71,7 +71,7 @@ function psetg($foo, $bar) {
 /**
  * Creates a flag/bit field.
  *
- * In the original source, there's a hard limit of 36 flag that can be added to
+ * In the original source, there's a hard limit of 35 flags that can be added to
  * the flag field, presumably done for memory conservation.
  *
  * @param string ... $fs A list of flags to add.
@@ -96,12 +96,18 @@ function flagword(...$fs) {
 
         $tot *= 2;
 
+        // This appears to be a bug in the original source: the intention seems
+        // to be to allow bit fields with up to 36 flags, but because the size
+        // is incremented and checked after the last value is set, it only
+        // allows 35 flags.
         $cnt++;
         if ($cnt > 36) {
             throw new FlagwordException();
         }
     });
 
+    // Also a bug in the original source: since count is incremented after the
+    // last value is added, the reported number of flags added is off by one.
     return $cnt;
 }
 
