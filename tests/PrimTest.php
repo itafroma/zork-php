@@ -15,39 +15,48 @@ use function Itafroma\Zork\msetg;
 use function Itafroma\Zork\psetg;
 use function Itafroma\Zork\newstruc;
 
-class PrimTest extends PHPUnit_Framework_TestCase
+class PrimTest extends ZorkTest
 {
-    public function setUp()
+    const FLAGSIZEMAX = 36;
+
+    public function tearDown()
     {
         global $zork;
 
-        foreach (array_keys($zork) as $key) {
-            if (strpos($key, 'PrimTest-') === 0) {
-                unset($zork[$key]);
+        parent::tearDown();
+
+        // Clear global flag state.
+        foreach ($this->flagOverflowProvider() as $flags) {
+            foreach ($flags[0] as $flag) {
+                unset($zork[$flag]);
             }
         }
     }
 
     /**
      * Test Itafroma\Zork\msetg().
+     *
+     * @dataProvider propertyProvider
      */
-    public function testMsetg()
+    public function testMsetg($property_key, $property_value)
     {
         global $zork;
 
-        $this->assertEquals('value', msetg('PrimTest-key', 'value'));
-        $this->assertEquals('value', $zork['PrimTest-key']);
+        $this->assertEquals($property_value, msetg($property_key, $property_value));
+        $this->assertEquals($property_value, $zork[$property_key]);
     }
 
     /**
      * Test Itafroma\Zork\msetg() with extant key using the same value.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testMsetgExtantKeySameValue()
+    public function testMsetgExtantKeySameValue($property_key, $property_value)
     {
-        msetg('PrimTest-key', 'value');
+        msetg($property_key, $property_value);
 
         try {
-            msetg('PrimTest-key', 'value');
+            msetg($property_key, $property_value);
         }
         catch (ConstantAlreadyDefinedException $e) {
             $this->fail('Itafroma\Zork\Exception\ConstantAlreadyDefinedException should not be thrown when global value is reassigned the same value.');
@@ -57,67 +66,71 @@ class PrimTest extends PHPUnit_Framework_TestCase
     /**
      * Test Itafroma\Zork\msetg() with extant key using a different value.
      *
+     * @dataProvider propertyProvider
      * @expectedException Itafroma\Zork\Exception\ConstantAlreadyDefinedException
      */
-    public function testMsetgExtantKeyDifferentValue()
+    public function testMsetgExtantKeyDifferentValue($property_key, $property_value1, $property_value2)
     {
         global $zork;
 
-        msetg('PrimTest-key', 'value1');
-        msetg('PrimTest-key', 'value2');
+        msetg($property_key, $property_value1);
+        msetg($property_key, $property_value2);
     }
 
     /**
      * Test Itafroma\Zork\psetg().
+     *
+     * @dataProvider propertyProvider
      */
-    public function testPsetg()
+    public function testPsetg($property_key, $property_value)
     {
         global $zork;
 
-        $this->assertEquals('value', psetg('PrimTest-key', 'value'));
-        $this->assertContains('PrimTest-key', array_keys($zork['PURE_LIST']));
+        $this->assertEquals($property_value, psetg($property_key, $property_value));
+        $this->assertContains($property_key, array_keys($zork['PURE_LIST']));
     }
 
     /**
      * Test Itafroma\Zork\psetg() with extant key.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testPsetgExtantKey()
+    public function testPsetgExtantKey($property_key, $property_value1, $property_value2)
     {
         global $zork;
 
-        psetg('PrimTest-key', 'value1');
+        psetg($property_key, $property_value1);
 
-        $this->assertEquals('value2', psetg('PrimTest-key', 'value2'));
-        $this->assertContains('PrimTest-key', array_keys($zork['PURE_LIST']));
+        $this->assertEquals($property_value2, psetg($property_key, $property_value2));
+        $this->assertContains($property_key, array_keys($zork['PURE_LIST']));
     }
 
     /**
      * Test Itafroma\Zork\psetg() with extant key and PURE_CAREFUL set.
      *
+     * @dataProvider propertyProvider
      * @expectedException Itafroma\Zork\Exception\PsetgDuplicateException
      */
-    public function testPsetgExtantKeyWithPureCareful()
+    public function testPsetgExtantKeyWithPureCareful($property_key, $property_value1, $property_value2)
     {
         global $zork;
 
         $zork['PURE_CAREFUL'] = true;
 
-        psetg('PrimTest-key', 'value1');
-        psetg('PrimTest-key', 'value2');
+        psetg($property_key, $property_value1);
+        psetg($property_key, $property_value2);
     }
 
     /**
      * Test Itafroma\Zork\flagword().
+     *
+     * @dataProvider flagProvider
      */
-    public function testFlagword()
+    public function testFlagword($flags)
     {
         global $zork;
 
-        for ($i = 0; $i < 5; ++$i) {
-            $flags[] = 'PrimTest-flag-' . $i;
-        }
-
-        $this->assertEquals(6, flagword(...$flags));
+        $this->assertEquals(self::FLAGSIZEMAX, flagword(...$flags));
 
         $tot = 1;
         foreach ($flags as $flag) {
@@ -128,16 +141,14 @@ class PrimTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test Itafroam\Zork\flagword() when GROUP_GLUE flag is set.
+     *
+     * @dataProvider flagProvider
      */
-    public function testFlagwordGroupGlueEnabled()
+    public function testFlagwordGroupGlueEnabled($flags)
     {
         global $zork;
 
         $zork['OBLIST']['GROUP_GLUE'] = true;
-
-        for ($i = 0; $i < 5; ++$i) {
-            $flags[] = 'PrimTest-flag-' . $i;
-        }
 
         flagword(...$flags);
 
@@ -149,14 +160,11 @@ class PrimTest extends PHPUnit_Framework_TestCase
     /**
      * Test Itafroma\Zork\flagword() with too many flags.
      *
+     * @dataProvider flagOverflowProvider
      * @expectedException Itafroma\Zork\Exception\FlagwordException
      */
-    public function testFlagwordOverflow()
+    public function testFlagwordOverflow($flags)
     {
-        for ($i = 0; $i < 37; ++$i) {
-            $flags[] = 'PrimTest-flag-' . $i;
-        }
-
         flagword(...$flags);
     }
 
@@ -172,54 +180,95 @@ class PrimTest extends PHPUnit_Framework_TestCase
 
     /**
      * Test Itafroma\Zork\make_slot() slot creation.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testMakeSlotCreate()
+    public function testMakeSlotCreate($property_key, $property_value)
     {
         global $zork;
 
-        $slot = make_slot('PrimTest-slot', 'value');
+        $slot = make_slot($property_key, $property_value);
 
         $this->assertInternalType('callable', $slot);
-        $this->assertEquals($slot, $zork['SLOTS']['PrimTest-slot']);
+        $this->assertEquals($slot, $zork['SLOTS'][$property_key]);
     }
 
     /**
      * Test Itafroma\Zork\make_slot() creation on an already-bound name.
      *
+     * @dataProvider propertyProvider
      * @expectedException Itafroma\Zork\Exception\SlotNameAlreadyUsedException
      */
-    public function testMakeSlotCreateDuplicate()
+    public function testMakeSlotCreateDuplicate($property_key, $property_value)
     {
-        msetg('PrimTest-slot', 'value');
-        make_slot('PrimTest-slot', 'value');
+        msetg($property_key, $property_value);
+        make_slot($property_key, $property_value);
     }
 
     /**
      * Test Itafroma\Zork\make_slot() slot write.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testMakeSlotWrite()
+    public function testMakeSlotWrite($property_key, $property_value)
     {
-        $slot = make_slot('PrimTest-slot', 'value');
+        $slot = make_slot($property_key, $property_value);
         $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
                      ->getMock();
 
-        $return = $slot($stub, 'value');
+        $return = $slot($stub, $property_value);
 
         $this->assertEquals($stub, $return);
-        $this->assertEquals('value', $return->oprops['PrimTest-slot']);
+        $this->assertEquals($property_value, $return->oprops[$property_key]);
     }
 
     /**
      * Test Itafroma\Zork\make_slot() slot read.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testMakeSlotRead()
+    public function testMakeSlotRead($property_key, $property_value)
     {
-        $slot = make_slot('PrimTest-slot', 'value');
+        $slot = make_slot($property_key, $property_value);
         $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
                      ->getMock();
 
-        $slot($stub, 'value');
+        $slot($stub, $property_value);
 
-        $this->assertEquals('value', $slot($stub));
+        $this->assertEquals($property_value, $slot($stub));
+    }
+
+
+    /**
+     * Generate a list of flags for a bit field.
+     *
+     * @param int $size The size of the bit field.
+     * @return array The generated list of flags.
+     */
+    protected function generateFlags($size)
+    {
+        // Subtracting one is done to account for the off-by-one bug replicated
+        // in \Itafroma\Zork\flagword().
+        for ($i = 0; $i < $size - 1; ++$i) {
+            $flags[] = 'ZorkTest-flag-' . $i;
+        }
+
+        return $flags;
+    }
+
+    /**
+     * Provide a list of flags up to the maximum bit field size.
+     */
+    public function flagProvider()
+    {
+        return [[$this->generateFlags(self::FLAGSIZEMAX)]];
+    }
+
+    /**
+     * Provide a list of flags beyond the maximum bit field size.
+     */
+    public function flagOverflowProvider()
+    {
+        return [[$this->generateFlags(self::FLAGSIZEMAX + 10)]];
     }
 }

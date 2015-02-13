@@ -7,111 +7,111 @@
 
 namespace Itafroma\Zork\Tests;
 
-use \PHPUnit_Framework_TestCase;
 use function Itafroma\Zork\oget;
 use function Itafroma\Zork\oput;
 
-class DefsTest extends PHPUnit_Framework_TestCase
+class DefsTest extends ZorkTest
 {
-    public function setUp()
-    {
-        global $zork;
-
-        foreach (array_keys($zork) as $key) {
-            if (strpos($key, 'DefsTest-') === 0) {
-                unset($zork[$key]);
-            }
-        }
-    }
-
     /**
      * Test Itafroma\Zork\oget() with empty property.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testOgetEmptyProperty()
+    public function testOgetEmptyProperty($property_key)
     {
         $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
                      ->getMock();
 
-        $this->assertNull(oget($stub, 'DefsTest-property'));
+        $this->assertNull(oget($stub, $property_key));
     }
 
     /**
      * Test Itafroma\Zork\oget() with extant property.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testOgetExtantProperty()
+    public function testOgetExtantProperty($property_key, $property_value)
     {
         $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
                      ->getMock();
 
-        $return = oput($stub, 'DefsTest-property', 'value');
+        $return = oput($stub, $property_key, $property_value);
 
-        $this->assertEquals('value', oget($return, 'DefsTest-property'));
+        $this->assertEquals($property_value, oget($return, $property_key));
     }
 
     /**
      * Test Itafroma\Zork\oget() with non-objects and non-rooms.
      *
+     * @dataProvider propertyProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testOgetOther()
+    public function testOgetOther($property_key)
     {
         $stub = $this->getMockBuilder('Itafroma\Zork\Prim\Struc')
                      ->getMock();
 
-        oget($stub, 'DefsTest-property');
+        oget($stub, $property_key);
     }
 
     /**
      * Test Itafroma\Zork\oput() with regular objects.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testOputObject()
+    public function testOputObject($property_key, $property_value)
     {
         $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
                      ->getMock();
 
-        $return = oput($stub, 'DefsTest-property', 'value');
+        $return = oput($stub, $property_key, $property_value);
 
         $this->assertEquals($stub, $return);
-        $this->assertEquals('value', $return->oprops['DefsTest-property']);
+        $this->assertEquals($property_value, $return->oprops[$property_key]);
     }
 
     /**
      * Test Itafroma\Zork\oput() with rooms.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testOputRoom()
+    public function testOputRoom($property_key, $property_value)
     {
         $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Room')
                      ->getMock();
 
-        $return = oput($stub, 'DefsTest-property', 'value');
+        $return = oput($stub, $property_key, $property_value);
 
         $this->assertEquals($stub, $return);
-        $this->assertEquals('value', $return->rprops['DefsTest-property']);
+        $this->assertEquals($property_value, $return->rprops[$property_key]);
     }
 
     /**
      * Test Itafroma\Zork\oput() with non-objects and non-rooms.
      *
+     * @dataProvider propertyProvider
      * @expectedException \InvalidArgumentException
      */
-    public function testOputOther()
+    public function testOputOther($property_key, $property_value)
     {
         $stub = $this->getMockBuilder('Itafroma\Zork\Prim\Struc')
                      ->getMock();
 
-        oput($stub, 'DefsTest-property', 'value');
+        oput($stub, $property_key, $property_value);
     }
 
     /**
      * Test Itafroma\Zork\oput() with empty object properties and add = false.
+     *
+     * @dataProvider propertyProvider
      */
-    public function testOputNoAdd()
+    public function testOputNoAdd($property_key, $property_value)
     {
         $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
                      ->getMock();
 
-        $return = oput($stub, 'DefsTest-property', 'value', false);
+        $return = oput($stub, $property_key, $property_value, false);
 
-        $this->assertArrayNotHasKey('DefsTest-property', $return->oprops);
+        $this->assertArrayNotHasKey($property_key, $return->oprops);
     }
 }
