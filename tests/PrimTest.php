@@ -208,34 +208,29 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\make_slot() slot write.
      *
-     * @dataProvider propertyProvider
+     * @dataProvider objectPropertyProvider
      */
-    public function testMakeSlotWrite($property_key, $property_value)
+    public function testMakeSlotWrite($struc, $property_key, $property_value)
     {
         $slot = make_slot($property_key, $property_value);
-        $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
-                     ->getMock();
+        $return = $slot($struc, $property_value);
 
-        $return = $slot($stub, $property_value);
-
-        $this->assertEquals($stub, $return);
+        $this->assertEquals($struc, $return);
         $this->assertEquals($property_value, $return->oprops[$property_key]);
     }
 
     /**
      * Test Itafroma\Zork\make_slot() slot read.
      *
-     * @dataProvider propertyProvider
+     * @dataProvider objectPropertyProvider
      */
-    public function testMakeSlotRead($property_key, $property_value)
+    public function testMakeSlotRead($struc, $property_key, $property_value)
     {
         $slot = make_slot($property_key, $property_value);
-        $stub = $this->getMockBuilder('Itafroma\Zork\Defs\Object')
-                     ->getMock();
 
-        $slot($stub, $property_value);
+        $slot($struc, $property_value);
 
-        $this->assertEquals($property_value, $slot($stub));
+        $this->assertEquals($property_value, $slot($struc));
     }
 
 
