@@ -26,7 +26,7 @@ class Object implements Struc
     /**
      * @var int $oflags Flags
      *
-     * This must be the same offset as $aflags.
+     * This must be the same offset as Itafroma\Zork\Defs\Adv::$aflags.
      */
     public $oflags;
 
