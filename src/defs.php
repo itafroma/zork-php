@@ -7,6 +7,7 @@
 
 namespace Itafroma\Zork;
 
+use Itafroma\Zork\Defs\Adv;
 use Itafroma\Zork\Defs\Object;
 use Itafroma\Zork\Defs\Room;
 use Itafroma\Zork\Prim\Struc;
@@ -18,65 +19,65 @@ global $zork;
 
 // Generalized oflags tester
 
-function trnn($obj, $bit) {
-    return ($bit & $obj->oflags) == 0;
+function trnn(Object $obj, $bit) {
+    return ($bit & $obj->oflags) !== 0;
 }
 
-function rtrnn($rm, $bit) {
-    return ($bit & $rm->rbits) == 0;
+function rtrnn(Room $rm, $bit) {
+    return ($bit & $rm->rbits) !== 0;
 }
 
-function gtrnn($rm, $bit) {
-    return ($bit & $rm->rglobal) == 0;
+function gtrnn(Room $rm, $bit) {
+    return ($bit & $rm->rglobal) !== 0;
 }
 
-function rtrz($rm, $bit) {
+function rtrz(Room $rm, $bit) {
     $rm->rbits &= ($bit ^ -1);
 
     return $rm->rbits;
 }
 
-function trc($obj, $bit) {
+function trc(Object $obj, $bit) {
     $obj->oflags ^= $bit;
 
     return $obj->oflags;
 }
 
-function trz($obj, $bit) {
+function trz(Object $obj, $bit) {
     $obj->oflags &= ($bit ^ -1);
 
     return $obj->oflags;
 }
 
-function tro($obj, $bit) {
+function tro(Object $obj, $bit) {
     $obj->oflags |= $bit;
 
     return $obj->oflags;
 }
 
-function rtro($rm, $bit) {
+function rtro(Room $rm, $bit) {
     $rm->rbits |= $bit;
 
     return $rm->rbits;
 }
 
-function rtrc($rm, $bit) {
+function rtrc(Room $rm, $bit) {
     $rm->rbits ^= $bit;
 
     return $rm->rbits;
 }
 
-function atrnn($adv, $bit) {
-    return ($bit & $adv->aflags) == 0;
+function atrnn(Adv $adv, $bit) {
+    return ($bit & $adv->aflags) !== 0;
 }
 
-function atrz($adv, $bit) {
+function atrz(Adv $adv, $bit) {
     $adv->aflags &= ($bit ^ -1);
 
     return $adv->aflags;
 }
 
-function atro($adv, $bit) {
+function atro(Adv $adv, $bit) {
     $adv->aflags |= $bit;
 
     return $adv->aflags;
