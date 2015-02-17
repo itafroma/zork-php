@@ -27,7 +27,7 @@ You can follow along with development on my blog in a series of posts I'm callin
 Installation is done using [Composer][7] via [Packagist][8]:
 
 ```sh
-composer create-project itafroma/zork:dev-master --dev
+composer create-project itafroma/zork:dev-master
 ```
 
 At this stage of development, there is no working binary, but you can run tests using [PHPUnit][9]:
