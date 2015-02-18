@@ -20,7 +20,7 @@ With that in mind, I have made a few conceits:
 
 ## Roadmap
 
-You can follow along with development on my blog in a series of posts I'm calling "[Porting Zork][5]". This project follows the [Semantic Versioning][6] standard: the first numbered unstable version, 0.1.0, will contain a running executable (though not a complete game). The 1.0.0 release will be a complete port.
+You can follow along with development on my blog in a series of posts I'm calling "[Porting Zork][5]". This project will follow the [Semantic Versioning][6] standard: the first numbered unstable version, 0.1.0, will contain a running executable (though not a complete game). The 1.0.0 release will be a complete port.
 
 ## Installation and usage
 
