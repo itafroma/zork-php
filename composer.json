@@ -7,21 +7,19 @@
     "authors": [
         {
             "name": "Tim Anderson",
-            "role": "Original implementor"
+            "role": "Original implementer"
         },
         {
             "name": "Marc Blank",
-            "homepage": "http://www.infocom-if.org/authors/blank.html",
-            "role": "Original implementor"
+            "role": "Original implementer"
         },
         {
             "name": "Bruce Daniels",
-            "role": "Original implementor"
+            "role": "Original implementer"
         },
         {
             "name": "Dave Lebling",
-            "homepage": "http://www.infocom-if.org/authors/lebling.html",
-            "role": "Original implementor"
+            "role": "Original implementer"
         },
         {
             "name": "Mark Trapp",
