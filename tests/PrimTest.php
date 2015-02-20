@@ -89,7 +89,7 @@ class PrimTest extends ZorkTest
     }
 
     /**
-     * Test Itafroma\Zork\psetg() with extant key and PURE_CAREFUL set.
+     * Test Itafroma\Zork\psetg() with extant key and PURE-CAREFUL set.
      *
      * @covers ::Itafroma\Zork\psetg
      * @dataProvider propertyProvider

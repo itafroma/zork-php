@@ -168,7 +168,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Itafroma\Zork\Atrz().
+     * Tests Itafroma\Zork\atrz().
      *
      * @covers ::Itafroma\Zork\atrz
      * @dataProvider advFlagsProvider
@@ -183,7 +183,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Itafroma\Zork\Atro().
+     * Tests Itafroma\Zork\atro().
      *
      * @covers ::Itafroma\Zork\atro
      * @dataProvider advFlagsProvider
