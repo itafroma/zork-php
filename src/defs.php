@@ -15,8 +15,6 @@ use \InvalidArgumentException;
 use function Itafroma\Zork\flagword;
 use function Itafroma\Zork\make_slot;
 
-global $zork;
-
 // Generalized oflags tester
 
 function trnn(Object $obj, $bit) {
@@ -87,7 +85,7 @@ function atro(Adv $adv, $bit) {
 make_slot('RVAL', 0);
 
 // Value for entering
-make_slot('RGLOBAL', $zork['STAR_BITS']);
+make_slot('RGLOBAL', gval('STAR_BITS'));
 
 // Globals for room
 flagword(...[

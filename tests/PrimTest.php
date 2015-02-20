@@ -19,20 +19,6 @@ class PrimTest extends ZorkTest
 {
     const FLAGSIZEMAX = 36;
 
-    public function tearDown()
-    {
-        global $zork;
-
-        parent::tearDown();
-
-        // Clear global flag state.
-        foreach ($this->flagOverflowProvider() as $flags) {
-            foreach ($flags[0] as $flag) {
-                unset($zork[$flag]);
-            }
-        }
-    }
-
     /**
      * Test Itafroma\Zork\msetg().
      *
@@ -40,10 +26,8 @@ class PrimTest extends ZorkTest
      */
     public function testMsetg($property_key, $property_value)
     {
-        global $zork;
-
         $this->assertEquals($property_value, msetg($property_key, $property_value));
-        $this->assertEquals($property_value, $zork[$property_key]);
+        $this->assertEquals($property_value, $this->state->get($property_key));
     }
 
     /**
@@ -71,8 +55,6 @@ class PrimTest extends ZorkTest
      */
     public function testMsetgExtantKeyDifferentValue($property_key, $property_value1, $property_value2)
     {
-        global $zork;
-
         msetg($property_key, $property_value1);
         msetg($property_key, $property_value2);
     }
@@ -84,10 +66,8 @@ class PrimTest extends ZorkTest
      */
     public function testPsetg($property_key, $property_value)
     {
-        global $zork;
-
         $this->assertEquals($property_value, psetg($property_key, $property_value));
-        $this->assertContains($property_key, array_keys($zork['PURE_LIST']));
+        $this->assertContains($property_key, $this->state->get('PURE-LIST'));
     }
 
     /**
@@ -97,12 +77,10 @@ class PrimTest extends ZorkTest
      */
     public function testPsetgExtantKey($property_key, $property_value1, $property_value2)
     {
-        global $zork;
-
         psetg($property_key, $property_value1);
 
         $this->assertEquals($property_value2, psetg($property_key, $property_value2));
-        $this->assertContains($property_key, array_keys($zork['PURE_LIST']));
+        $this->assertContains($property_key, $this->state->get('PURE-LIST'));
     }
 
     /**
@@ -113,9 +91,7 @@ class PrimTest extends ZorkTest
      */
     public function testPsetgExtantKeyWithPureCareful($property_key, $property_value1, $property_value2)
     {
-        global $zork;
-
-        $zork['PURE_CAREFUL'] = true;
+        $this->state->set('PURE-CAREFUL', true);
 
         psetg($property_key, $property_value1);
         psetg($property_key, $property_value2);
@@ -128,32 +104,29 @@ class PrimTest extends ZorkTest
      */
     public function testFlagword($flags)
     {
-        global $zork;
-
         $this->assertEquals(self::FLAGSIZEMAX, flagword(...$flags));
 
         $tot = 1;
         foreach ($flags as $flag) {
-            $this->assertEquals($tot, $zork[$flag]);
+            $this->assertEquals($tot, $this->state->get($flag));
             $tot *= 2;
         }
     }
 
     /**
-     * Test Itafroam\Zork\flagword() when GROUP_GLUE flag is set.
+     * Test Itafroam\Zork\flagword() when GROUP-GLUE flag is set.
      *
      * @dataProvider flagProvider
      */
     public function testFlagwordGroupGlueEnabled($flags)
     {
-        global $zork;
-
-        $zork['OBLIST']['GROUP_GLUE'] = true;
+        $oblist = $this->state->getOblist('INITIAL');
+        $oblist->set('GROUP-GLUE', true);
 
         flagword(...$flags);
 
         foreach ($flags as $flag) {
-            $this->assertArrayNotHasKey($flag, $zork);
+            $this->assertFalse($this->state->isAssigned($flag));
         }
     }
 
@@ -185,12 +158,10 @@ class PrimTest extends ZorkTest
      */
     public function testMakeSlotCreate($property_key, $property_value)
     {
-        global $zork;
+        $slots = make_slot($property_key, $property_value);
 
-        $slot = make_slot($property_key, $property_value);
-
-        $this->assertInternalType('callable', $slot);
-        $this->assertEquals($slot, $zork['SLOTS'][$property_key]);
+        $this->assertInternalType('callable', $slots[$property_key]);
+        $this->assertEquals($slots[$property_key], $this->state->get('SLOTS')[$property_key]);
     }
 
     /**
@@ -212,8 +183,8 @@ class PrimTest extends ZorkTest
      */
     public function testMakeSlotWrite($struc, $property_key, $property_value)
     {
-        $slot = make_slot($property_key, $property_value);
-        $return = $slot($struc, $property_value);
+        $slots = make_slot($property_key, $property_value);
+        $return = $slots[$property_key]($struc, $property_value);
 
         $this->assertEquals($struc, $return);
         $this->assertEquals($property_value, $return->oprops[$property_key]);
@@ -226,13 +197,12 @@ class PrimTest extends ZorkTest
      */
     public function testMakeSlotRead($struc, $property_key, $property_value)
     {
-        $slot = make_slot($property_key, $property_value);
+        $slots = make_slot($property_key, $property_value);
 
-        $slot($struc, $property_value);
+        $slots[$property_key]($struc, $property_value);
 
-        $this->assertEquals($property_value, $slot($struc));
+        $this->assertEquals($property_value, $slots[$property_key]($struc));
     }
-
 
     /**
      * Generate a list of flags for a bit field.

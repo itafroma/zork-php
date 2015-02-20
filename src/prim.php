@@ -29,15 +29,11 @@ use \BadFunctionCallException;
  * @throws Itafroma\Zork\Exception\ConstantAlreadyDefinedException
  */
 function msetg($foo, $bar) {
-    global $zork;
-
-    if (isset($zork[$foo]) && $bar !== $zork[$foo]) {
+    if (gassigned($foo) && $bar != gval($foo)) {
         throw new ConstantAlreadyDefinedException();
     }
 
-    $zork[$foo] = $bar;
-
-    return $zork[$foo];
+    return setg($foo, $bar);
 }
 
 /**
@@ -49,19 +45,14 @@ function msetg($foo, $bar) {
  * @throws Itafroma\Zork\Exception\PsetgDuplicateException
  */
 function psetg($foo, $bar) {
-    global $zork;
+    setg($foo, $bar);
+    $pl = gassigned('PURE-LIST') ? gval('PURE-LIST') : setg('PURE-LIST', []);
 
-    $pl = [];
-    $zork[$foo] = $bar;
-
-    if (!isset($zork['PURE_LIST'])) {
-        $zork['PURE_LIST'] = [];
+    if (!in_array($foo, $pl)) {
+        array_unshift($pl, $foo);
+        setg('PURE-LIST', $pl);
     }
-
-    if (!in_array($foo, $zork['PURE_LIST'])) {
-        array_unshift($zork['PURE_LIST'], $foo);
-    }
-    elseif (!empty($zork['PURE_CAREFUL'])) {
+    elseif (gassigned('PURE-CAREFUL') && gval('PURE-CAREFUL')) {
         throw new PsetgDuplicateException();
     }
 
@@ -79,18 +70,17 @@ function psetg($foo, $bar) {
  * @throws Itafroma\Zork\Exception\FlagwordException
  */
 function flagword(...$fs) {
-    global $zork;
-
+    $state = GlobalState::getInstance();
     $tot = 1;
     $cnt = 1;
 
     // Given <FLAGWORD>'s usage in the rest of the original source, this could
     // be simplified to a simple foreach loop. The use of array_walk_recursive()
     // here is to emulate the use of MDL's <MAPF> SUBR in the original source.
-    array_walk_recursive($fs, function($f) use ($zork, &$tot, &$cnt) {
-        // It's unknown what the GROUP_GLUE symbol is in the oblist. It appears
+    array_walk_recursive($fs, function($f) use ($state, &$tot, &$cnt) {
+        // It's unknown what the GROUP-GLUE symbol is in the oblist. It appears
         // to be always empty.
-        if (is_scalar($f) && !isset($zork['OBLIST']['GROUP_GLUE'])) {
+        if (is_scalar($f) && !lookup('GROUP-GLUE', $state->getOblist('INITIAL'))) {
             msetg($f, $tot);
         }
 
@@ -129,7 +119,7 @@ function newstruc($nam, $prim, ...$elem) {
     throw new BadFunctionCallException('newstruc() has been removed: implement Itafroma\Zork\Prim\Struc instead.');
 }
 
-$zork['SLOTS'] = [];
+setg('SLOTS', []);
 
 /**
  * "Define a funny slot in an object." (sic)
@@ -147,13 +137,12 @@ $zork['SLOTS'] = [];
  * @throws Itafroma\Zork|Exception\SlotNameAlreadyUsedException;
  */
 function make_slot($name, $def) {
-    global $zork;
-
     // Slot names can only be used once globally.
     // REDEFINE is apparently a local variable in the original <DEFINE> and is
     // never bound.
-    if (!isset($zork[$name]) || !empty($redefine)) {
-        $zork['SLOTS'][$name] = function (Struc $obj, $val = null) use ($name, $def) {
+    if (!gassigned($name) || !empty($redefine)) {
+        $slots = gval('SLOTS');
+        $slots[$name] = function (Struc $obj, $val = null) use ($name, $def) {
             if (isset($val)) {
                 return oput($obj, $name, $val);
             }
@@ -161,8 +150,8 @@ function make_slot($name, $def) {
             return oget($obj, $name) ?: $def;
         };
 
-        return $zork['SLOTS'][$name];
+        return setg('SLOTS', $slots);
     }
 
-    throw new SlotNameAlreadyUsedException();
+    throw new SlotNameAlreadyUsedException("$name already used.");
 }

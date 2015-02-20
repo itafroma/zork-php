@@ -42,6 +42,7 @@
             "Itafroma\\Zork\\": "src/"
         },
         "files": [
+            "src/system.php",
             "src/prim.php",
             "src/dung.php",
             "src/defs.php"

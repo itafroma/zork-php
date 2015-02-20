@@ -6,21 +6,32 @@
 
 namespace Itafroma\Zork\Tests;
 
+use Itafroma\Zork\GlobalState;
 use Itafroma\Zork\Defs\Object;
 use Itafroma\Zork\Defs\Room;
 use \PHPUnit_Framework_TestCase;
 
 abstract class ZorkTest extends PHPUnit_Framework_TestCase
 {
+    protected static $stateData = null;
+    protected $state;
+
+    public static function setUpBeforeClass()
+    {
+        $instance = GlobalState::getInstance();
+        self::$stateData = $instance->export();
+    }
+
+    public function setUp()
+    {
+        $this->state = GlobalState::getInstance();
+    }
+
     public function tearDown()
     {
-        global $zork;
-
-        // Clear global state.
-        foreach ($this->propertyProvider() as $property) {
-            $key = $property[0];
-            unset($zork[$key]);
-        }
+        // Reset global state to original values.
+        $this->state = GlobalState::getInstance();
+        $this->state->import(self::$stateData);
     }
 
     /**
@@ -74,5 +85,4 @@ abstract class ZorkTest extends PHPUnit_Framework_TestCase
 
         return $properties;
     }
-
 }

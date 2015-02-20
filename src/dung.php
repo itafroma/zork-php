@@ -7,6 +7,4 @@
 
 namespace Itafroma\Zork;
 
-global $zork;
-
-$zork['STAR_BITS'] = 0;
+setg('STAR_BITS', 0);
