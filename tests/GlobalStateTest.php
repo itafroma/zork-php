@@ -13,6 +13,8 @@ class GlobalStateTest extends ZorkTest
 {
     /**
      * Tests Itafroma\Zork\GlobalState::getInstance().
+     *
+     * @covers Itafroma\Zork\GlobalState::getInstance
      */
     public function testGetInstance()
     {
@@ -21,6 +23,8 @@ class GlobalStateTest extends ZorkTest
 
     /**
      * Tests Itafroma\Zork\GlobalState::getInstance() with reset.
+     *
+     * @covers Itafroma\Zork\GlobalState::getInstance
      */
     public function testGetInstanceReset()
     {
@@ -29,6 +33,8 @@ class GlobalStateTest extends ZorkTest
 
     /**
      * Tests clone prevention.
+     *
+     * @covers Itafroma\Zork\GlobalState::__clone
      */
     public function testClone()
     {
