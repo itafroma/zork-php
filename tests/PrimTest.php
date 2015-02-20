@@ -164,6 +164,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\make_slot() slot creation.
      *
+     * @covers ::Itafroma\Zork\make_slot
      * @dataProvider propertyProvider
      */
     public function testMakeSlotCreate($property_key, $property_value)
@@ -177,6 +178,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\make_slot() creation on an already-bound name.
      *
+     * @covers ::Itafroma\Zork\make_slot
      * @dataProvider propertyProvider
      * @expectedException Itafroma\Zork\Exception\SlotNameAlreadyUsedException
      */
@@ -189,6 +191,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\make_slot() slot write.
      *
+     * @covers ::Itafroma\Zork\make_slot
      * @dataProvider objectPropertyProvider
      */
     public function testMakeSlotWrite($struc, $property_key, $property_value)
@@ -203,6 +206,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\make_slot() slot read.
      *
+     * @covers ::Itafroma\Zork\make_slot
      * @dataProvider objectPropertyProvider
      */
     public function testMakeSlotRead($struc, $property_key, $property_value)
