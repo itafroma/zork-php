@@ -15,6 +15,7 @@ class DefsTest extends ZorkTest
     /**
      * Test Itafroma\Zork\oget() with empty property.
      *
+     * @covers ::Itafroma\Zork\oget
      * @dataProvider objectPropertyProvider
      */
     public function testOgetEmptyProperty($struc, $property_key)
@@ -25,6 +26,7 @@ class DefsTest extends ZorkTest
     /**
      * Test Itafroma\Zork\oget() with extant property.
      *
+     * @covers ::Itafroma\Zork\oget
      * @dataProvider objectPropertyProvider
      */
     public function testOgetExtantProperty($struc, $property_key, $property_value)
@@ -37,6 +39,7 @@ class DefsTest extends ZorkTest
     /**
      * Test Itafroma\Zork\oget() with non-objects and non-rooms.
      *
+     * @covers ::Itafroma\Zork\oget
      * @dataProvider strucPropertyProvider
      * @expectedException \InvalidArgumentException
      */
@@ -48,6 +51,7 @@ class DefsTest extends ZorkTest
     /**
      * Test Itafroma\Zork\oput() with regular objects.
      *
+     * @covers ::Itafroma\Zork\oput
      * @dataProvider objectPropertyProvider
      */
     public function testOputObject($struc, $property_key, $property_value)
@@ -61,6 +65,7 @@ class DefsTest extends ZorkTest
     /**
      * Test Itafroma\Zork\oput() with rooms.
      *
+     * @covers ::Itafroma\Zork\oput
      * @dataProvider roomPropertyProvider
      */
     public function testOputRoom($struc, $property_key, $property_value)
@@ -74,6 +79,7 @@ class DefsTest extends ZorkTest
     /**
      * Test Itafroma\Zork\oput() with non-objects and non-rooms.
      *
+     * @covers ::Itafroma\Zork\oput
      * @dataProvider strucPropertyProvider
      * @expectedException \InvalidArgumentException
      */
@@ -85,6 +91,7 @@ class DefsTest extends ZorkTest
     /**
      * Test Itafroma\Zork\oput() with empty object properties and add = false.
      *
+     * @covers ::Itafroma\Zork\oput
      * @dataProvider objectPropertyProvider
      */
     public function testOputNoAdd($struc, $property_key, $property_value)

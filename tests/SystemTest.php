@@ -19,6 +19,7 @@ class SystemTest extends ZorkTest
     /**
      * Tests Itafroma\Zork\gassigned().
      *
+     * @covers ::Itafroma\Zork\gassigned
      * @dataProvider propertyProvider
      */
     function testGassigned($name, $value)
@@ -32,6 +33,7 @@ class SystemTest extends ZorkTest
     /**
      * Tests Itafroma\Zork\gval().
      *
+     * @covers ::Itafroma\Zork\gval
      * @dataProvider propertyProvider
      */
     function testGval($name, $value)
@@ -43,6 +45,7 @@ class SystemTest extends ZorkTest
     /**
      * Tests Itafroma\Zork\insert().
      *
+     * @covers ::Itafroma\Zork\insert
      * @dataProvider oblistPropertyProvider
      */
     function testInsert($oblist, $name, $value)
@@ -55,6 +58,7 @@ class SystemTest extends ZorkTest
     /**
      * Tests Itafroma\Zork\insert() when atom is already set.
      *
+     * @covers ::Itafroma\Zork\insert
      * @dataProvider oblistPropertyProvider
      * @expectedException Itafroma\Zork\Exception\OblistAtomExistsException
      */
@@ -68,6 +72,7 @@ class SystemTest extends ZorkTest
     /**
      * Tests Itafroma\Zork\lookup().
      *
+     * @covers ::Itafroma\Zork\lookup
      * @dataProvider oblistPropertyProvider
      */
     function testLookup($oblist, $name, $value)
@@ -80,6 +85,7 @@ class SystemTest extends ZorkTest
     /**
      * Tests Itafroma\Zork\setg().
      *
+     * @covers ::Itafroma\Zork\setg
      * @dataProvider propertyProvider
      */
     function testSetg($name, $value)

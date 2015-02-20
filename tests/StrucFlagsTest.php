@@ -30,6 +30,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\trnn().
      *
+     * @covers ::Itafroma\Zork\trnn
      * @dataProvider objectFlagsProvider
      */
     public function testTrnn($obj, $bit)
@@ -42,6 +43,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroam\Zork\rtrnn().
      *
+     * @covers ::Itafroma\Zork\rtrnn
      * @dataProvider roomFlagsProvider
      */
     public function testRtrnn($rm, $bit)
@@ -54,6 +56,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroam\Zork\gtrnn().
      *
+     * @covers ::Itafroma\Zork\gtrnn
      * @dataProvider roomFlagsProvider
      */
     public function testGtrnn($rm, $bit)
@@ -66,6 +69,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\rtrz().
      *
+     * @covers ::Itafroma\Zork\rtrz
      * @dataProvider roomFlagsProvider
      */
     public function testRtrz($rm, $bit)
@@ -80,6 +84,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\trc().
      *
+     * @covers ::Itafroma\Zork\trc
      * @dataProvider objectFlagsProvider
      */
     public function testTrc($obj, $bit)
@@ -94,6 +99,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\trz().
      *
+     * @covers ::Itafroma\Zork\trz
      * @dataProvider objectFlagsProvider
      */
     public function testTrz($obj, $bit)
@@ -108,6 +114,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\tro().
      *
+     * @covers ::Itafroma\Zork\tro
      * @dataProvider objectFlagsProvider
      */
     public function testTro($obj, $bit)
@@ -121,6 +128,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\rtro().
      *
+     * @covers ::Itafroma\Zork\rtro
      * @dataProvider roomFlagsProvider
      */
     public function testRtro($rm, $bit)
@@ -134,6 +142,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\rtrc().
      *
+     * @covers ::Itafroma\Zork\rtrc
      * @dataProvider roomFlagsProvider
      */
     public function testRtrc($rm, $bit)
@@ -148,6 +157,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\atrnn().
      *
+     * @covers ::Itafroma\Zork\atrnn
      * @dataProvider advFlagsProvider()
      */
     public function testAtrnn($adv, $bit)
@@ -160,6 +170,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\Atrz().
      *
+     * @covers ::Itafroma\Zork\atrz
      * @dataProvider advFlagsProvider
      */
     public function testAtrz($adv, $bit)
@@ -174,6 +185,7 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     /**
      * Tests Itafroma\Zork\Atro().
      *
+     * @covers ::Itafroma\Zork\atro
      * @dataProvider advFlagsProvider
      */
     public function testAtro($adv, $bit)

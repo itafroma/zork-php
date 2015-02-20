@@ -22,6 +22,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\msetg().
      *
+     * @covers ::Itafroma\Zork\msetg
      * @dataProvider propertyProvider
      */
     public function testMsetg($property_key, $property_value)
@@ -33,6 +34,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\msetg() with extant key using the same value.
      *
+     * @covers ::Itafroma\Zork\msetg
      * @dataProvider propertyProvider
      */
     public function testMsetgExtantKeySameValue($property_key, $property_value)
@@ -50,6 +52,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\msetg() with extant key using a different value.
      *
+     * @covers ::Itafroma\Zork\msetg
      * @dataProvider propertyProvider
      * @expectedException Itafroma\Zork\Exception\ConstantAlreadyDefinedException
      */
@@ -62,6 +65,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\psetg().
      *
+     * @covers ::Itafroma\Zork\psetg
      * @dataProvider propertyProvider
      */
     public function testPsetg($property_key, $property_value)
@@ -73,6 +77,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\psetg() with extant key.
      *
+     * @covers ::Itafroma\Zork\psetg
      * @dataProvider propertyProvider
      */
     public function testPsetgExtantKey($property_key, $property_value1, $property_value2)
@@ -86,6 +91,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\psetg() with extant key and PURE_CAREFUL set.
      *
+     * @covers ::Itafroma\Zork\psetg
      * @dataProvider propertyProvider
      * @expectedException Itafroma\Zork\Exception\PsetgDuplicateException
      */
@@ -100,6 +106,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\flagword().
      *
+     * @covers ::Itafroma\Zork\flagword
      * @dataProvider flagProvider
      */
     public function testFlagword($flags)
@@ -116,6 +123,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroam\Zork\flagword() when GROUP-GLUE flag is set.
      *
+     * @covers ::Itafroma\Zork\flagword
      * @dataProvider flagProvider
      */
     public function testFlagwordGroupGlueEnabled($flags)
@@ -133,6 +141,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\flagword() with too many flags.
      *
+     * @covers ::Itafroma\Zork\flagword
      * @dataProvider flagOverflowProvider
      * @expectedException Itafroma\Zork\Exception\FlagwordException
      */
@@ -144,6 +153,7 @@ class PrimTest extends ZorkTest
     /**
      * Test Itafroma\Zork\newstruc().
      *
+     * @covers ::Itafroma\Zork\newstruc
      * @expectedException \BadFunctionCallException
      */
     public function testNewstruc()
