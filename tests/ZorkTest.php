@@ -25,6 +25,7 @@ abstract class ZorkTest extends PHPUnit_Framework_TestCase
     public function setUp()
     {
         $this->state = GlobalState::getInstance();
+        $this->state->import(self::$stateData);
     }
 
     public function tearDown()

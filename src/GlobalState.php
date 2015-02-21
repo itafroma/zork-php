@@ -22,7 +22,7 @@ class GlobalState
      */
     private function __construct()
     {
-        $this->oblists['INITIAL'] = new Oblist();
+        $this->createOblist('INITIAL');
     }
 
     /**
@@ -94,23 +94,43 @@ class GlobalState
     }
 
     /**
+     * Creates a new oblist.
+     *
+     * @param string $name The name of the oblist to create.
+     * @return Itafroma\Zork\Oblist The oblist created.
+     */
+    public function createOblist($name)
+    {
+        $this->oblists[$name] = new Oblist();
+
+        return $this->oblists[$name];
+    }
+
+    /**
      * Export the current state.
      *
-     * @return mixed[] An array of globally-assigned values.
+     * @return mixed[] An array containing the global state.
      */
     public function export()
     {
-        return $this->atoms;
+        return [
+            'atoms' => $this->atoms,
+            'oblists' => $this->oblists,
+        ];
     }
 
     /**
      * Import a state.
      *
-     * @param mixed[] An array of globally-assigned vallues.
+     * @param mixed[] An array containing the global state.
      * @return void
      */
-    public function import(array $atoms)
+    public function import(array $state)
     {
-        $this->atoms = $atoms;
+        foreach ($state as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->{$key} = $value;
+            }
+        }
     }
 }
