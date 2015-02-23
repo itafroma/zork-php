@@ -69,10 +69,7 @@ class GlobalStateTest extends ZorkTest
      */
     public function testGetAtomExists($property_name, $property_value)
     {
-        $reflected_object = new ReflectionObject($this->state);
-        $reflected_atoms = $reflected_object->getProperty('atoms');
-        $reflected_atoms->setAccessible(true);
-        $reflected_atoms->setValue($this->state, [$property_name => $property_value]);
+        $this->setPrivateProperty($this->state, 'atoms', [$property_name => $property_value]);
 
         $this->assertEquals($property_value, $this->state->get($property_name));
     }
@@ -96,14 +93,10 @@ class GlobalStateTest extends ZorkTest
      */
     public function testSet($property_name, $property_value)
     {
-        $reflected_object = new ReflectionObject($this->state);
-        $reflected_atoms = $reflected_object->getProperty('atoms');
-        $reflected_atoms->setAccessible(true);
-
         $return = $this->state->set($property_name, $property_value);
 
         $this->assertEquals($property_value, $return);
-        $this->assertEquals($property_value, $reflected_atoms->getValue($this->state)[$property_name]);
+        $this->assertEquals($property_value, $this->getPrivateProperty($this->state, 'atoms')[$property_name]);
     }
 
     /**
@@ -114,10 +107,7 @@ class GlobalStateTest extends ZorkTest
      */
     public function testIsAssignedAtomExists($property_name, $property_value)
     {
-        $reflected_object = new ReflectionObject($this->state);
-        $reflected_atoms = $reflected_object->getProperty('atoms');
-        $reflected_atoms->setAccessible(true);
-        $reflected_atoms->setValue($this->state, [$property_name => $property_value]);
+        $this->setPrivateProperty($this->state, 'atoms', [$property_name => $property_value]);
 
         $this->assertTrue($this->state->isAssigned($property_name));
     }
@@ -142,11 +132,7 @@ class GlobalStateTest extends ZorkTest
     public function testGetOblistOblistExists($oblist_name)
     {
         $oblist = new Oblist();
-
-        $reflected_object = new ReflectionObject($this->state);
-        $reflected_atoms = $reflected_object->getProperty('oblists');
-        $reflected_atoms->setAccessible(true);
-        $reflected_atoms->setValue($this->state, [$oblist_name => $oblist]);
+        $this->setPrivateProperty($this->state, 'oblists', [$oblist_name => $oblist]);
 
         $this->assertEquals($oblist, $this->state->getOblist($oblist_name));
     }

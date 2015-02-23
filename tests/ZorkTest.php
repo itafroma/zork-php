@@ -10,6 +10,7 @@ use Itafroma\Zork\GlobalState;
 use Itafroma\Zork\Defs\Object;
 use Itafroma\Zork\Defs\Room;
 use \PHPUnit_Framework_TestCase;
+use \ReflectionObject;
 
 abstract class ZorkTest extends PHPUnit_Framework_TestCase
 {
@@ -33,6 +34,28 @@ abstract class ZorkTest extends PHPUnit_Framework_TestCase
         // Reset global state to original values.
         $this->state = GlobalState::getInstance();
         $this->state->import(self::$stateData);
+    }
+
+    /**
+     * Gets the value of a private property.
+     */
+    public function getPrivateProperty($object, $property)
+    {
+        $reflected_object = new ReflectionObject($object);
+        $reflected_property = $reflected_object->getProperty($property);
+        $reflected_property->setAccessible(true);
+
+        return $reflected_property->getValue($object);
+    }
+    /**
+     * Sets the value of a private property.
+     */
+    public function setPrivateProperty($object, $property, $value)
+    {
+        $reflected_object = new ReflectionObject($object);
+        $reflected_property = $reflected_object->getProperty($property);
+        $reflected_property->setAccessible(true);
+        $reflected_property->setValue($object, $value);
     }
 
     /**
