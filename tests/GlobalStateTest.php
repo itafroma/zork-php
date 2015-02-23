@@ -215,7 +215,6 @@ class GlobalStateTest extends ZorkTest
         }
     }
 
-
     /**
      * Provides a default state.
      */
