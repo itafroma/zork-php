@@ -20,6 +20,7 @@ use function Itafroma\Zork\rtrc;
 use function Itafroma\Zork\rtrnn;
 use function Itafroma\Zork\rtro;
 use function Itafroma\Zork\rtrz;
+use function Itafroma\Zork\strnn;
 use function Itafroma\Zork\trnn;
 use function Itafroma\Zork\trc;
 use function Itafroma\Zork\tro;
@@ -197,6 +198,20 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     }
 
     /**
+     * Tests Itafroma\Zork\strnn().
+     *
+     * @covers ::Itafroma\Zork\strnn
+     * @dataProvider syntaxFlagsProvider()
+     */
+    public function testStrnn($syntax, $bit)
+    {
+        $syntax->sflags = $bit;
+
+        $this->assertTrue(strnn($syntax, $bit));
+    }
+
+
+    /**
      * Provides objects (items) and a test flag.
      */
     public function objectFlagsProvider()
@@ -223,6 +238,16 @@ class StrucFlagsTest extends PHPUnit_Framework_TestCase
     {
         return [
             [new Adv(), 1 << 2],
+        ];
+    }
+
+    /**
+     * Provides syntaxes and a test flag.
+     */
+    public function syntaxFlagsProvider()
+    {
+        return [
+            [new Syntax(), 1 << 2],
         ];
     }
 }

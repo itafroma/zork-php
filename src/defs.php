@@ -10,6 +10,7 @@ namespace Itafroma\Zork;
 use Itafroma\Zork\Defs\Adv;
 use Itafroma\Zork\Defs\Object;
 use Itafroma\Zork\Defs\Room;
+use Itafroma\Zork\Defs\Syntax;
 use Itafroma\Zork\Prim\Struc;
 use \InvalidArgumentException;
 use function Itafroma\Zork\flagword;
@@ -102,6 +103,17 @@ flagword(...[
     'RENDGAME',   // This room is in the end game
     'RNWALLBIT',  // This room doesn't have walls
 ]);
+
+/**
+ * Test a bit in the SFLAGs slot of a SYNTAX
+ *
+ * @param Itafroma\Zork\Defs\Syntax $s   The syntax to test
+ * @param int                       $bit The bit to test
+ * @return boolean FALSE if bit is set, TRUE otherwise
+ */
+function strnn(Syntax $s, $bit) {
+    return ($bit & $s->sflags) !== 0;
+}
 
 /**
  * Retrieves an object property.
