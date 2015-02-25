@@ -15,6 +15,7 @@ use Itafroma\Zork\Prim\Struc;
 use \InvalidArgumentException;
 use function Itafroma\Zork\flagword;
 use function Itafroma\Zork\make_slot;
+use function Itafroma\Zork\setg;
 
 // Generalized oflags tester
 
@@ -162,4 +163,4 @@ function oput(Struc $o, $p, $x, $add = true) {
     return $o;
 }
 
-$rooms = [];
+setg('ROOMS', []);
