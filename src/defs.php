@@ -164,3 +164,7 @@ function oput(Struc $o, $p, $x, $add = true) {
 }
 
 setg('ROOMS', []);
+
+setg('OBJECTS', []);
+
+setg('ACTORS', []);
