@@ -6,9 +6,9 @@
 
 namespace Itafroma\Zork\Tests;
 
-use Itafroma\Zork\GlobalState;
 use Itafroma\Zork\Defs\Object;
 use Itafroma\Zork\Defs\Room;
+use Itafroma\Zork\State\GlobalState;
 use \PHPUnit_Framework_TestCase;
 use \ReflectionObject;
 

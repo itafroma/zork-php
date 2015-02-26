@@ -5,7 +5,7 @@
  * Oblist type.
  */
 
-namespace Itafroma\Zork;
+namespace Itafroma\Zork\State;
 
 use Itafroma\Zork\Exception\OblistAtomExistsException;
 

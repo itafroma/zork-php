@@ -7,7 +7,7 @@
 
 namespace Itafroma\Zork\Tests;
 
-use Itafroma\Zork\Oblist;
+use Itafroma\Zork\State\Oblist;
 use function Itafroma\Zork\gassigned;
 use function Itafroma\Zork\gval;
 use function Itafroma\Zork\insert;

@@ -2,19 +2,19 @@
 
 /**
  * @file
- * Tests for Itafroma\Zork\Oblist
+ * Tests for Itafroma\Zork\State\Oblist
  */
 
 namespace Itafroma\Zork\Tests;
 
-use Itafroma\Zork\Oblist;
+use Itafroma\Zork\State\Oblist;
 
 class OblistTest extends ZorkTest
 {
     /**
-     * Tests Itafroma\Zork\Oblist::get() when the requested object exists.
+     * Tests Itafroma\Zork\State\Oblist::get() when the requested object exists.
      *
-     * @covers Itafroma\Zork\Oblist::get
+     * @covers Itafroma\Zork\State\Oblist::get
      * @dataProvider oblistPropertyProvider
      */
     public function testGetObjectExists($oblist, $property_name, $property_value)
@@ -25,9 +25,9 @@ class OblistTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\Oblist::get() when the requested object does not exist.
+     * Tests Itafroma\Zork\State\Oblist::get() when the requested object does not exist.
      *
-     * @covers Itafroma\Zork\Oblist::get
+     * @covers Itafroma\Zork\State\Oblist::get
      * @dataProvider oblistPropertyProvider
      */
     public function testGetObjectDoesNotExist($oblist, $property_name)
@@ -36,9 +36,9 @@ class OblistTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\Oblist::set() when the requested object already exists.
+     * Tests Itafroma\Zork\State\Oblist::set() when the requested object already exists.
      *
-     * @covers Itafroma\Zork\Oblist::set
+     * @covers Itafroma\Zork\State\Oblist::set
      * @dataProvider oblistPropertyProvider
      * @expectedException Itafroma\Zork\Exception\OblistAtomExistsException
      */
@@ -49,9 +49,9 @@ class OblistTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\Oblist::set() when the requested object does not already exist.
+     * Tests Itafroma\Zork\State\Oblist::set() when the requested object does not already exist.
      *
-     * @covers Itafroma\Zork\Oblist::set
+     * @covers Itafroma\Zork\State\Oblist::set
      * @dataProvider oblistPropertyProvider
      */
     public function testSetObjectDoesNotExist($oblist, $property_name, $property_value)

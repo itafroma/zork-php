@@ -5,14 +5,14 @@
  * Global state singleton.
  */
 
-namespace Itafroma\Zork;
+namespace Itafroma\Zork\State;
 
 class GlobalState
 {
     /** @var mixed[] $atoms The list of globally assigned atoms. */
     private $atoms = [];
 
-    /** @var Itafroma\Zork\Oblist[] $atoms The list of oblists. */
+    /** @var Itafroma\Zork\State\Oblist[] $atoms The list of oblists. */
     private $oblists = [];
 
     /**
@@ -86,7 +86,7 @@ class GlobalState
      * Retrieves an oblist by name.
      *
      * @param string $name The name of the oblist to retrieve.
-     * @return Itafroma\Zork\Oblist The oblist retrieved if it exists, null otherwise.
+     * @return Itafroma\Zork\State\Oblist The oblist retrieved if it exists, null otherwise.
      */
     public function getOblist($name)
     {
@@ -97,7 +97,7 @@ class GlobalState
      * Creates a new oblist.
      *
      * @param string $name The name of the oblist to create.
-     * @return Itafroma\Zork\Oblist The oblist created.
+     * @return Itafroma\Zork\State\Oblist The oblist created.
      */
     public function createOblist($name)
     {

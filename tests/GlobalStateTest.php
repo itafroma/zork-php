@@ -2,22 +2,22 @@
 
 /**
  * @file
- * Tests Itafroma\Zork\GlobalState.
+ * Tests Itafroma\Zork\State\GlobalState.
  */
 
 namespace Itafroma\Zork\Tests;
 
-use Itafroma\Zork\GlobalState;
-use Itafroma\Zork\Oblist;
+use Itafroma\Zork\State\GlobalState;
+use Itafroma\Zork\State\Oblist;
 use \ReflectionClass;
 use \ReflectionObject;
 
 class GlobalStateTest extends ZorkTest
 {
     /**
-     * Tests Itafroma\Zork\GlobalState::getInstance().
+     * Tests Itafroma\Zork\State\GlobalState::getInstance().
      *
-     * @covers Itafroma\Zork\GlobalState::getInstance
+     * @covers Itafroma\Zork\State\GlobalState::getInstance
      */
     public function testGetInstance()
     {
@@ -25,9 +25,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::getInstance() with reset.
+     * Tests Itafroma\Zork\State\GlobalState::getInstance() with reset.
      *
-     * @covers Itafroma\Zork\GlobalState::getInstance
+     * @covers Itafroma\Zork\State\GlobalState::getInstance
      */
     public function testGetInstanceReset()
     {
@@ -37,7 +37,7 @@ class GlobalStateTest extends ZorkTest
     /**
      * Tests clone prevention.
      *
-     * @covers Itafroma\Zork\GlobalState::__clone
+     * @covers Itafroma\Zork\State\GlobalState::__clone
      */
     public function testClone()
     {
@@ -45,9 +45,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::__construct().
+     * Tests Itafroma\Zork\State\GlobalState::__construct().
      *
-     * @covers Itafroma\Zork\GlobalState::__construct
+     * @covers Itafroma\Zork\State\GlobalState::__construct
      */
     public function testConstructor()
     {
@@ -62,9 +62,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::get() when the requested atom exists.
+     * Tests Itafroma\Zork\State\GlobalState::get() when the requested atom exists.
      *
-     * @covers Itafroma\Zork\GlobalState::get
+     * @covers Itafroma\Zork\State\GlobalState::get
      * @dataProvider propertyProvider
      */
     public function testGetAtomExists($property_name, $property_value)
@@ -75,9 +75,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::get() when the requested atom does not exist.
+     * Tests Itafroma\Zork\State\GlobalState::get() when the requested atom does not exist.
      *
-     * @covers Itafroma\Zork\GlobalState::get
+     * @covers Itafroma\Zork\State\GlobalState::get
      * @dataProvider propertyProvider
      */
     public function testGetAtomDoesNotExist($property_name)
@@ -86,9 +86,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::set().
+     * Tests Itafroma\Zork\State\GlobalState::set().
      *
-     * @covers Itafroma\Zork\GlobalState::set
+     * @covers Itafroma\Zork\State\GlobalState::set
      * @dataProvider propertyProvider
      */
     public function testSet($property_name, $property_value)
@@ -100,9 +100,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::isAssigned() when the requested atom exists.
+     * Tests Itafroma\Zork\State\GlobalState::isAssigned() when the requested atom exists.
      *
-     * @covers Itafroma\Zork\GlobalState::isAssigned
+     * @covers Itafroma\Zork\State\GlobalState::isAssigned
      * @dataProvider propertyProvider
      */
     public function testIsAssignedAtomExists($property_name, $property_value)
@@ -113,9 +113,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::isAssigned() when the requested atom does not exist.
+     * Tests Itafroma\Zork\State\GlobalState::isAssigned() when the requested atom does not exist.
      *
-     * @covers Itafroma\Zork\GlobalState::isAssigned
+     * @covers Itafroma\Zork\State\GlobalState::isAssigned
      * @dataProvider propertyProvider
      */
     public function testIsAssignedAtomDoesNotExist($property_name)
@@ -124,9 +124,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::getOblist() when the requested oblist exists.
+     * Tests Itafroma\Zork\State\GlobalState::getOblist() when the requested oblist exists.
      *
-     * @covers Itafroma\Zork\GlobalState::getOblist
+     * @covers Itafroma\Zork\State\GlobalState::getOblist
      * @dataProvider propertyProvider
      */
     public function testGetOblistOblistExists($oblist_name)
@@ -138,9 +138,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::getOblist() when the requested oblist does not exist.
+     * Tests Itafroma\Zork\State\GlobalState::getOblist() when the requested oblist does not exist.
      *
-     * @covers Itafroma\Zork\GlobalState::getOblist
+     * @covers Itafroma\Zork\State\GlobalState::getOblist
      * @dataProvider propertyProvider
      */
     public function testGetOblistOblistDoesNotExist($oblist_name)
@@ -149,9 +149,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::createOblist().
+     * Tests Itafroma\Zork\State\GlobalState::createOblist().
      *
-     * @covers Itafroma\Zork\GlobalState::createOblist
+     * @covers Itafroma\Zork\State\GlobalState::createOblist
      * @dataProvider propertyProvider
      */
     public function testCreateOblist($oblist_name)
@@ -163,9 +163,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::export().
+     * Tests Itafroma\Zork\State\GlobalState::export().
      *
-     * @covers Itafroma\Zork\GlobalState::export
+     * @covers Itafroma\Zork\State\GlobalState::export
      * @dataProvider stateProvider
      */
     public function testExport($state)
@@ -196,9 +196,9 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\GlobalState::import().
+     * Tests Itafroma\Zork\State\GlobalState::import().
      *
-     * @covers Itafroma\Zork\GlobalState::import
+     * @covers Itafroma\Zork\State\GlobalState::import
      * @dataProvider stateProvider
      */
     public function testImport($state)

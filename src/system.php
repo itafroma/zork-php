@@ -7,6 +7,9 @@
 
 namespace Itafroma\Zork;
 
+use Itafroma\Zork\State\GlobalState;
+use Itafroma\Zork\State\Oblist;
+
 /**
  * Checks to see if a variable is assigned a value within the global state.
  *
@@ -37,7 +40,7 @@ function gval($atom)
  *
  * @param string $value The value to add to the oblist.
  * @param string $pname The name of the atom to add to the oblist.
- * @param Itafroma\Zork\Oblist $oblist The oblist to modify.
+ * @param Itafroma\Zork\State\Oblist $oblist The oblist to modify.
  * @return mixed The value added to the oblist.
  */
 function insert($value, $pname, Oblist $oblist) {
@@ -48,7 +51,7 @@ function insert($value, $pname, Oblist $oblist) {
  * Retrieves a value from an oblist.
  *
  * @param string $pname The name of the atom from which to retrieve the value.
- * @param Itafroma\Zork\Oblist $oblist The oblist to check.
+ * @param Itafroma\Zork\State\Oblist $oblist The oblist to check.
  * @return mixed The value if the atom exists in the oblist, false otherwise.
  */
 function lookup($pname, Oblist $oblist) {
