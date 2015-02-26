@@ -105,6 +105,12 @@ flagword(...[
     'RNWALLBIT',  // This room doesn't have walls
 ]);
 
+// SFLAGs of a SYNTAX
+flagword(...[
+    'SFLIP', // T -- Flip args (for verbs like PICK)
+    'SDRIVER', // T -- Default syntax for gwimming (sic) and orphanery
+]);
+
 /**
  * Test a bit in the SFLAGs slot of a SYNTAX
  *
