@@ -128,7 +128,7 @@ class PrimTest extends ZorkTest
      */
     public function testFlagwordGroupGlueEnabled($flags)
     {
-        $oblist = $this->state->getOblist('INITIAL');
+        $oblist = $this->state->createOblist('INITIAL');
         $oblist->set('GROUP-GLUE', true);
 
         flagword(...$flags);

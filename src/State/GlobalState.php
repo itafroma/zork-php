@@ -15,14 +15,18 @@ class GlobalState
     /** @var Itafroma\Zork\State\Oblist[] $atoms The list of oblists. */
     private $oblists = [];
 
+    /** @var Itafroma\Zork\State\OblistCollection $oblistCollcetion A collection of oblists. */
+    private $oblistCollection;
+
     /**
      * Sets initial system state.
      *
      * Declared private to prevent creation outside of singleton mechanics.
      */
-    private function __construct()
+    private function __construct(CollectionInterface $oblist_collection)
     {
-        $this->createOblist('INITIAL');
+        $this->oblistCollection = $oblist_collection;
+        $this->oblistCollection->create('INITIAL');
     }
 
     /**
@@ -33,7 +37,7 @@ class GlobalState
         static $instance = null;
 
         if ($instance === null || $reset) {
-            $instance = new static();
+            $instance = new static(new OblistCollection());
         }
 
         return $instance;
@@ -83,6 +87,19 @@ class GlobalState
     }
 
     /**
+     * Replaces the current oblist collection.
+     *
+     * @param Itafroma\Zork\State\OblistCollection $oblist_collection The new oblist collection.
+     * @return Itafroma\Zork\State\OblistCollection The oblist collection assigned.
+     */
+    public function setOblistCollection(OblistCollection $oblist_collection)
+    {
+        $this->oblistCollection = $oblist_collection;
+
+        return $this->oblistCollection;
+    }
+
+    /**
      * Retrieves an oblist by name.
      *
      * @param string $name The name of the oblist to retrieve.
@@ -90,7 +107,7 @@ class GlobalState
      */
     public function getOblist($name)
     {
-        return isset($this->oblists[$name]) ? $this->oblists[$name] : null;
+        return $this->oblistCollection->get($name);
     }
 
     /**
@@ -101,9 +118,7 @@ class GlobalState
      */
     public function createOblist($name)
     {
-        $this->oblists[$name] = new Oblist();
-
-        return $this->oblists[$name];
+        return $this->oblistCollection->create($name);
     }
 
     /**
@@ -115,7 +130,7 @@ class GlobalState
     {
         return [
             'atoms' => $this->atoms,
-            'oblists' => $this->oblists,
+            'oblistCollection' => $this->oblistCollection,
         ];
     }
 
