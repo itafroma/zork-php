@@ -224,11 +224,13 @@ class GlobalStateTest extends ZorkTest
         $reflected_class = new ReflectionClass(GlobalState::class);
         $global_state = $reflected_class->newInstanceWithoutConstructor();
 
+        $oblist_collection = new OblistCollection();
+
         $constructor = $reflected_class->getConstructor();
         $constructor->setAccessible(true);
-        $constructor->invoke($global_state, new OblistCollection());
+        $constructor->invoke($global_state, $oblist_collection);
 
-        return [[$global_state]];
+        return [[$global_state, $oblist_collection]];
     }
 
     /**
