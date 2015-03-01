@@ -162,6 +162,19 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
+     * Tests Itafroma\Zork\State\GlobalState::setOblistCollection().
+     *
+     * @covers Itafroma\Zork\State\GlobalState::setOblistCollection
+     * @dataProvider globalStateProvider
+     */
+    public function testSetOblistCollection($global_state, $oblist_collection)
+    {
+        $global_state->setOblistCollection($oblist_collection);
+
+        $this->assertEquals($oblist_collection, $this->getPrivateProperty($global_state, 'oblistCollection'));
+    }
+
+    /**
      * Tests Itafroma\Zork\State\GlobalState::export().
      *
      * @covers Itafroma\Zork\State\GlobalState::export
