@@ -25,7 +25,7 @@ class GlobalState
      */
     private function __construct(CollectionInterface $oblist_collection)
     {
-        $this->oblistCollection = $oblist_collection;
+        $this->setOblistCollection($oblist_collection);
         $this->oblistCollection->create('INITIAL');
     }
 

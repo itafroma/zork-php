@@ -50,12 +50,17 @@ class GlobalStateTest extends ZorkTest
      * Tests Itafroma\Zork\State\GlobalState::__construct().
      *
      * @covers Itafroma\Zork\State\GlobalState::__construct
-     * @dataProvider globalStateProvider
      */
-    public function testConstructor($global_state)
+    public function testConstructor()
     {
-        $return = $global_state->getOblist('INITIAL');
+        $prophecy = $this->prophesize(OblistCollection::class);
+        $prophecy->create('INITIAL')->shouldBeCalled();
+        $prophecy->get('INITIAL')->willReturn(new Oblist());
+        $oblist_collection = $prophecy->reveal();
 
+        $global_state = $this->createGlobalState($oblist_collection);
+
+        $this->assertEquals($oblist_collection, $this->getPrivateProperty($global_state, 'oblistCollection'));
         $this->assertInstanceOf(Oblist::class, $global_state->getOblist('INITIAL'));
     }
 
@@ -221,14 +226,8 @@ class GlobalStateTest extends ZorkTest
      */
     public function globalStateProvider()
     {
-        $reflected_class = new ReflectionClass(GlobalState::class);
-        $global_state = $reflected_class->newInstanceWithoutConstructor();
-
         $oblist_collection = new OblistCollection();
-
-        $constructor = $reflected_class->getConstructor();
-        $constructor->setAccessible(true);
-        $constructor->invoke($global_state, $oblist_collection);
+        $global_state = $this->createGlobalState($oblist_collection);
 
         return [[$global_state, $oblist_collection]];
     }
@@ -276,4 +275,22 @@ class GlobalStateTest extends ZorkTest
 
         return $data;
    }
+
+   /**
+    * Creates a GlobalState object, bypassing its singleton checks.
+    *
+    * @param Itafroma\Zork\State\OblistCollection $oblist_collection The oblist collection to attach to the global state.
+    * @return Itafroma\Zork\State\GlobalState An instance of GlobalState.
+    */
+   public function createGlobalState(OblistCollection $oblist_collection)
+   {
+        $reflected_class = new ReflectionClass(GlobalState::class);
+        $global_state = $reflected_class->newInstanceWithoutConstructor();
+
+        $constructor = $reflected_class->getConstructor();
+        $constructor->setAccessible(true);
+        $constructor->invoke($global_state, $oblist_collection);
+
+        return $global_state;
+    }
 }
