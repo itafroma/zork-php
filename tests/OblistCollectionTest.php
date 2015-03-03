@@ -13,6 +13,20 @@ use Itafroma\Zork\State\OblistCollection;
 class OblistCollectionTest extends ZorkTest
 {
     /**
+     * Tests Itafroma\Zork\OblistCollection::create().
+     *
+     * @covers Itafroma\Zork\State\OblistCollection::create
+     * @dataProvider oblistCollectionProvider
+     */
+    public function testCreateOblist($oblist_collection, $name)
+    {
+        $return = $oblist_collection->create($name);
+
+        $this->assertInstanceOf(Oblist::class, $return);
+        $this->assertEquals($return, $this->getPrivateProperty($oblist_collection, 'atoms')[$name]);
+    }
+
+    /**
      * Tests Itafroma\Zork\State\OblistCollection::get() when the oblist exists.
      *
      * @covers Itafroma\Zork\State\OblistCollection::get
