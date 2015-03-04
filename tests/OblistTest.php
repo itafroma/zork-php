@@ -12,6 +12,33 @@ use Itafroma\Zork\State\Oblist;
 class OblistTest extends ZorkTest
 {
     /**
+     * Tests Itafroma\Zork|State\Oblist::create() when the atom does not exist.
+     *
+     * @covers Itafroma\Zork\State\Oblist::create
+     * @dataProvider oblistPropertyProvider
+     */
+    public function testCreateAtomDoesNotExist($oblist, $property_name)
+    {
+        $return = $oblist->create($property_name);
+
+        $this->assertNull($return);
+    }
+
+    /**
+     * Tests Itafroma\Zork|State\Oblist::create() when the atom already exists.
+     *
+     * @covers Itafroma\Zork\State\Oblist::create
+     * @dataProvider oblistPropertyProvider
+     */
+    public function testCreateAtomExists($oblist, $property_name, $property_value)
+    {
+        $oblist->set($property_name, $property_value);
+        $return = $oblist->create($property_name);
+
+        $this->assertEquals($property_value, $return);
+    }
+
+    /**
      * Tests Itafroma\Zork\State\Oblist::get() when the requested object exists.
      *
      * @covers Itafroma\Zork\State\Oblist::get
