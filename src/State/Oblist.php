@@ -32,7 +32,8 @@ class Oblist extends AbstractCollection
      * @param string $pname The name of the atom from which to retrieve the value.
      * @return mixed The value if the atom exists in the oblist, false otherwise.
      */
-    public function get($pname) {
+    public function get($pname)
+    {
         return isset($this->atoms[$pname]) ? $this->atoms[$pname] : false;
     }
 
@@ -44,7 +45,8 @@ class Oblist extends AbstractCollection
      * @return mixed The value added to the oblist.
      * @throws Itafroma\Zork\Exception\OblistAtomExistsException
      */
-    public function set($pname, $value) {
+    public function set($pname, $value)
+    {
         if (isset($this->atoms[$pname])) {
             throw new OblistAtomExistsException;
         }
