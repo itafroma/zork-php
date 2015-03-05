@@ -52,8 +52,5 @@
         "psr-4": {
             "Itafroma\\Zork\\Tests\\": "tests/"
         }
-    },
-    "bin": [
-        "bin/zork.php"
-    ]
+    }
 }
