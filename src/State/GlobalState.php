@@ -12,9 +12,6 @@ class GlobalState
     /** @var mixed[] $atoms The list of globally assigned atoms. */
     private $atoms = [];
 
-    /** @var Itafroma\Zork\State\Oblist[] $atoms The list of oblists. */
-    private $oblists = [];
-
     /** @var Itafroma\Zork\State\OblistCollection $oblistCollcetion A collection of oblists. */
     private $oblistCollection;
 
