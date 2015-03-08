@@ -36,6 +36,44 @@ class AbstractCollectionTest extends ZorkTest
     }
 
     /**
+     * Tests Itafroma\Zork\State\AbstractCollection::set().
+     *
+     * @covers Itafroma\Zork\State\AbstractCollection::set
+     * @dataProvider abstractCollectionPropertyProvider
+     */
+    public function testSet($abstract_collection, $property_name, $property_value)
+    {
+        $return = $abstract_collection->set($property_name, $property_value);
+
+        $this->assertEquals($property_value, $return);
+        $this->assertEquals($property_value, $abstract_collection->get($property_name));
+    }
+
+    /**
+     * Tests Itafroma\Zork\State\AbstractCollection::exists() when the atom exists.
+     *
+     * @covers Itafroma\Zork\State\AbstractCollection::exists
+     * @dataProvider abstractCollectionPropertyProvider
+     */
+    public function testExistsAtomExists($abstract_collection, $property_name, $property_value)
+    {
+        $abstract_collection->set($property_name, $property_value);
+
+        $this->assertTrue($abstract_collection->exists($property_name));
+    }
+
+    /**
+     * Tests Itafroma\Zork\State\AbstractCollection::exists() when the atom does not exist.
+     *
+     * @covers Itafroma\Zork\State\AbstractCollection::exists
+     * @dataProvider abstractCollectionPropertyProvider
+     */
+    public function testExistsAtomDoesNotExist($abstract_collection, $property_name)
+    {
+        $this->assertFalse($abstract_collection->exists($property_name));
+    }
+
+    /**
      * Provides an abstract collection mock with test properties.
      */
     public function abstractCollectionPropertyProvider()

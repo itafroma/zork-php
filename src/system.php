@@ -9,6 +9,7 @@ namespace Itafroma\Zork;
 
 use Itafroma\Zork\State\GlobalState;
 use Itafroma\Zork\State\Oblist;
+use Itafroma\Zork\Exception\OblistAtomExistsException;
 
 /**
  * Checks to see if a variable is assigned a value within the global state.
@@ -38,12 +39,19 @@ function gval($atom)
 /**
  * Adds a value to an oblist.
  *
+ * If the atom already exists within the oblists, an exception is thrown.
+ *
  * @param string $value The value to add to the oblist.
  * @param string $pname The name of the atom to add to the oblist.
  * @param Itafroma\Zork\State\Oblist $oblist The oblist to modify.
  * @return mixed The value added to the oblist.
+ * @throws Itafroma\Zork\Exception\OblistAtomExistsException
  */
 function insert($value, $pname, Oblist $oblist) {
+    if ($oblist->exists($pname)) {
+        throw new OblistAtomExistsException;
+    }
+
     return $oblist->set($pname, $value);
 }
 

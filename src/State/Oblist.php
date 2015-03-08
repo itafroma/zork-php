@@ -36,23 +36,4 @@ class Oblist extends AbstractCollection
     {
         return isset($this->atoms[$pname]) ? $this->atoms[$pname] : false;
     }
-
-    /**
-     * Adds a value to the oblist.
-     *
-     * @param string $pname The name of the atom to add to the oblist.
-     * @param string $value The value to add to the oblist.
-     * @return mixed The value added to the oblist.
-     * @throws Itafroma\Zork\Exception\OblistAtomExistsException
-     */
-    public function set($pname, $value)
-    {
-        if (isset($this->atoms[$pname])) {
-            throw new OblistAtomExistsException;
-        }
-
-        $this->atoms[$pname] = $value;
-
-        return $value;
-    }
 }
