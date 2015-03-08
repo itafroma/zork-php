@@ -8,8 +8,6 @@
 namespace Itafroma\Zork\Tests;
 
 use Itafroma\Zork\State\GlobalState;
-use Itafroma\Zork\State\Oblist;
-use Itafroma\Zork\State\OblistCollection;
 use \ReflectionClass;
 use \ReflectionObject;
 
@@ -53,15 +51,7 @@ class GlobalStateTest extends ZorkTest
      */
     public function testConstructor()
     {
-        $prophecy = $this->prophesize(OblistCollection::class);
-        $prophecy->create('INITIAL')->shouldBeCalled();
-        $prophecy->get('INITIAL')->willReturn(new Oblist());
-        $oblist_collection = $prophecy->reveal();
-
-        $global_state = $this->createGlobalState($oblist_collection);
-
-        $this->assertEquals($oblist_collection, $this->getPrivateProperty($global_state, 'oblistCollection'));
-        $this->assertInstanceOf(Oblist::class, $global_state->getOblist('INITIAL'));
+        $global_state = $this->createGlobalState();
     }
 
     /**
@@ -127,59 +117,6 @@ class GlobalStateTest extends ZorkTest
     }
 
     /**
-     * Tests Itafroma\Zork\State\GlobalState::getOblist() when the requested oblist exists.
-     *
-     * @covers Itafroma\Zork\State\GlobalState::getOblist
-     * @dataProvider stateProvider
-     */
-    public function testGetOblistOblistExists($global_state, $state, $oblist_name)
-    {
-        $oblist_collection = new OblistCollection();
-        $oblist = $oblist_collection->create($oblist_name);
-        $this->setPrivateProperty($global_state, 'oblistCollection', $oblist_collection);
-
-        $this->assertEquals($oblist, $global_state->getOblist($oblist_name));
-    }
-
-    /**
-     * Tests Itafroma\Zork\State\GlobalState::getOblist() when the requested oblist does not exist.
-     *
-     * @covers Itafroma\Zork\State\GlobalState::getOblist
-     * @dataProvider stateProvider
-     */
-    public function testGetOblistOblistDoesNotExist($global_state, $state, $oblist_name)
-    {
-        $this->assertNull($global_state->getOblist($oblist_name));
-    }
-
-    /**
-     * Tests Itafroma\Zork\State\GlobalState::createOblist().
-     *
-     * @covers Itafroma\Zork\State\GlobalState::createOblist
-     * @dataProvider stateProvider
-     */
-    public function testCreateOblist($global_state, $state, $oblist_name)
-    {
-        $return = $global_state->createOblist($oblist_name);
-
-        $this->assertInstanceOf(Oblist::class, $return);
-        $this->assertEquals($return, $global_state->getOblist($oblist_name));
-    }
-
-    /**
-     * Tests Itafroma\Zork\State\GlobalState::setOblistCollection().
-     *
-     * @covers Itafroma\Zork\State\GlobalState::setOblistCollection
-     * @dataProvider globalStateProvider
-     */
-    public function testSetOblistCollection($global_state, $oblist_collection)
-    {
-        $global_state->setOblistCollection($oblist_collection);
-
-        $this->assertEquals($oblist_collection, $this->getPrivateProperty($global_state, 'oblistCollection'));
-    }
-
-    /**
      * Tests Itafroma\Zork\State\GlobalState::export().
      *
      * @covers Itafroma\Zork\State\GlobalState::export
@@ -193,14 +130,11 @@ class GlobalStateTest extends ZorkTest
 
         $this->assertInternalType('array', $return);
         $this->assertArrayHasKey('atoms', $return);
-        $this->assertArrayHasKey('oblistCollection', $return);
 
         foreach ($state['atoms'] as $atom => $value) {
             $this->assertArrayHasKey($atom, $return['atoms']);
             $this->assertEquals($value, $return['atoms'][$atom]);
         }
-
-        $this->assertInstanceOf(OblistCollection::class, $return['oblistCollection']);
     }
 
     /**
@@ -209,7 +143,7 @@ class GlobalStateTest extends ZorkTest
      * @covers Itafroma\Zork\State\GlobalState::import
      * @dataProvider stateProvider
      */
-    public function testImport($global_state, $state, $oblist_name)
+    public function testImport($global_state, $state)
     {
         $global_state->import($state);
 
@@ -217,8 +151,6 @@ class GlobalStateTest extends ZorkTest
             $this->assertTrue($global_state->isAssigned($atom));
             $this->assertEquals($value, $global_state->get($atom));
         }
-
-        $this->assertEquals($state['oblistCollection']->get($oblist_name), $global_state->getOblist($oblist_name));
     }
 
     /**
@@ -226,10 +158,9 @@ class GlobalStateTest extends ZorkTest
      */
     public function globalStateProvider()
     {
-        $oblist_collection = new OblistCollection();
-        $global_state = $this->createGlobalState($oblist_collection);
+        $global_state = $this->createGlobalState();
 
-        return [[$global_state, $oblist_collection]];
+        return [[$global_state]];
     }
 
     /**
@@ -258,18 +189,13 @@ class GlobalStateTest extends ZorkTest
         $data = [];
 
         foreach ($properties as $i => $property) {
-            $oblist_collection = new OblistCollection();
-            $oblist_collection->create($property[0]);
-
             $state = [
                 'atoms' => [$property[0] => $property[1]],
-                'oblistCollection' => $oblist_collection,
             ];
 
             $data[] = [
                 $global_states[$i][0],
                 $state,
-                $property[0],
             ];
         }
 
@@ -279,17 +205,16 @@ class GlobalStateTest extends ZorkTest
    /**
     * Creates a GlobalState object, bypassing its singleton checks.
     *
-    * @param Itafroma\Zork\State\OblistCollection $oblist_collection The oblist collection to attach to the global state.
     * @return Itafroma\Zork\State\GlobalState An instance of GlobalState.
     */
-   public function createGlobalState(OblistCollection $oblist_collection)
+   public function createGlobalState()
    {
         $reflected_class = new ReflectionClass(GlobalState::class);
         $global_state = $reflected_class->newInstanceWithoutConstructor();
 
         $constructor = $reflected_class->getConstructor();
         $constructor->setAccessible(true);
-        $constructor->invoke($global_state, $oblist_collection);
+        $constructor->invoke($global_state);
 
         return $global_state;
     }

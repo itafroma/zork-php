@@ -33,6 +33,11 @@
         "issues": "https://github.com/itafroma/zork-php/issues",
         "source": "https://github.com/itafroma/zork-php"
     },
+    "require": {
+        "symfony/config": "~2.6",
+        "symfony/dependency-injection": "~2.6",
+        "symfony/yaml": "~2.6"
+    },
     "require-dev": {
         "phpunit/phpunit": "~4.5",
         "satooshi/php-coveralls": "<=1.0@dev"

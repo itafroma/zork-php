@@ -7,6 +7,7 @@
 
 namespace Itafroma\Zork\Tests;
 
+use Itafroma\Zork\ServiceContainer;
 use Itafroma\Zork\Exception\ConstantAlreadyDefinedException;
 use \PHPUnit_Framework_TestCase;
 use function Itafroma\Zork\flagword;
@@ -128,8 +129,10 @@ class PrimTest extends ZorkTest
      */
     public function testFlagwordGroupGlueEnabled($flags)
     {
-        $oblist = $this->state->createOblist('INITIAL');
-        $oblist->set('GROUP-GLUE', true);
+        $container = ServiceContainer::getContainer();
+        $oblists = $container->get('oblists');
+        $initial_oblist = $oblists->get('INITIAL');
+        $initial_oblist->set('GROUP-GLUE', true);
 
         flagword(...$flags);
 

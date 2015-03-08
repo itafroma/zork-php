@@ -71,17 +71,18 @@ function psetg($foo, $bar) {
  * @throws Itafroma\Zork\Exception\FlagwordException
  */
 function flagword(...$fs) {
-    $state = GlobalState::getInstance();
+    $container = ServiceContainer::getContainer();
+    $oblists = $container->get('oblists');
     $tot = 1;
     $cnt = 1;
 
     // Given <FLAGWORD>'s usage in the rest of the original source, this could
     // be simplified to a simple foreach loop. The use of array_walk_recursive()
     // here is to emulate the use of MDL's <MAPF> SUBR in the original source.
-    array_walk_recursive($fs, function($f) use ($state, &$tot, &$cnt) {
+    array_walk_recursive($fs, function($f) use ($oblists, &$tot, &$cnt) {
         // It's unknown what the GROUP-GLUE symbol is in the oblist. It appears
         // to be always empty.
-        if (is_scalar($f) && !lookup('GROUP-GLUE', $state->getOblist('INITIAL'))) {
+        if (is_scalar($f) && !lookup('GROUP-GLUE', $oblists->get('INITIAL'))) {
             msetg($f, $tot);
         }
 

@@ -12,18 +12,13 @@ class GlobalState
     /** @var mixed[] $atoms The list of globally assigned atoms. */
     private $atoms = [];
 
-    /** @var Itafroma\Zork\State\OblistCollection $oblistCollcetion A collection of oblists. */
-    private $oblistCollection;
-
     /**
      * Sets initial system state.
      *
      * Declared private to prevent creation outside of singleton mechanics.
      */
-    private function __construct(CollectionInterface $oblist_collection)
+    private function __construct()
     {
-        $this->setOblistCollection($oblist_collection);
-        $this->oblistCollection->create('INITIAL');
     }
 
     /**
@@ -34,7 +29,7 @@ class GlobalState
         static $instance = null;
 
         if ($instance === null || $reset) {
-            $instance = new static(new OblistCollection());
+            $instance = new static();
         }
 
         return $instance;
@@ -84,41 +79,6 @@ class GlobalState
     }
 
     /**
-     * Replaces the current oblist collection.
-     *
-     * @param Itafroma\Zork\State\OblistCollection $oblist_collection The new oblist collection.
-     * @return Itafroma\Zork\State\OblistCollection The oblist collection assigned.
-     */
-    public function setOblistCollection(OblistCollection $oblist_collection)
-    {
-        $this->oblistCollection = $oblist_collection;
-
-        return $this->oblistCollection;
-    }
-
-    /**
-     * Retrieves an oblist by name.
-     *
-     * @param string $name The name of the oblist to retrieve.
-     * @return Itafroma\Zork\State\Oblist The oblist retrieved if it exists, null otherwise.
-     */
-    public function getOblist($name)
-    {
-        return $this->oblistCollection->get($name);
-    }
-
-    /**
-     * Creates a new oblist.
-     *
-     * @param string $name The name of the oblist to create.
-     * @return Itafroma\Zork\State\Oblist The oblist created.
-     */
-    public function createOblist($name)
-    {
-        return $this->oblistCollection->create($name);
-    }
-
-    /**
      * Export the current state.
      *
      * @return mixed[] An array containing the global state.
@@ -127,7 +87,6 @@ class GlobalState
     {
         return [
             'atoms' => $this->atoms,
-            'oblistCollection' => $this->oblistCollection,
         ];
     }
 

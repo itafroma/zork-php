@@ -1,0 +1,9 @@
+#
+# Service container definition.
+#
+
+services:
+    oblists:
+        class: Itafroma\Zork\State\OblistCollection
+        calls:
+            - [create, ['INITIAL']]
