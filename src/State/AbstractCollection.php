@@ -17,7 +17,12 @@ abstract class AbstractCollection implements CollectionInterface
      * @param string $atom The name of the atom to create.
      * @return mixed The atom created.
      */
-    abstract public function create($name);
+    public function create($name)
+    {
+        $this->atoms[$name] = null;
+
+        return $this->atoms[$name];
+    }
 
     /**
      * Retrieves an atom by name.

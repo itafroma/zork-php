@@ -12,6 +12,19 @@ use Itafroma\Zork\State\AbstractCollection;
 class AbstractCollectionTest extends ZorkTest
 {
     /**
+     * Tests Itafroma\Zork\AbstractCollection::create().
+     *
+     * @covers Itafroma\Zork\State\AbstractCollection::create
+     * @dataProvider abstractCollectionPropertyProvider
+     */
+    public function testCreateAtom($abstract_collection, $property_name)
+    {
+        $return = $abstract_collection->create($property_name);
+
+        $this->assertEquals($return, $this->getPrivateProperty($abstract_collection, 'atoms')[$property_name]);
+    }
+
+    /**
      * Tests Itafroma\Zork\State\AbstractCollection::get() when atom exists.
      *
      * @covers Itafroma\Zork\State\AbstractCollection::get
