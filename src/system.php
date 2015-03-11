@@ -29,8 +29,7 @@ function gassigned($atom) {
  * @param string $atom The name of the variable to retrieve.
  * @return mixed The value of the variable if set, false otherwise.
  */
-function gval($atom)
-{
+function gval($atom) {
     $state = GlobalState::getInstance();
 
     return $state->get($atom);
