@@ -18,9 +18,9 @@ use Itafroma\Zork\Exception\OblistAtomExistsException;
  * @return boolean true if the variable is assigned, false otherwise.
  */
 function gassigned($atom) {
-    $state = GlobalState::getInstance();
+    $atoms = ServiceContainer::getContainer()->get('atoms');
 
-    return $state->isAssigned($atom);
+    return $atoms->exists($atom);
 }
 
 /**
@@ -30,9 +30,9 @@ function gassigned($atom) {
  * @return mixed The value of the variable if set, false otherwise.
  */
 function gval($atom) {
-    $state = GlobalState::getInstance();
+    $atoms = ServiceContainer::getContainer()->get('atoms');
 
-    return $state->get($atom);
+    return $atoms->get($atom);
 }
 
 /**
@@ -73,7 +73,7 @@ function lookup($pname, Oblist $oblist) {
  * @return mixed The new value of the variable.
  */
 function setg($atom, $any) {
-    $state = GlobalState::getInstance();
+    $atoms = ServiceContainer::getContainer()->get('atoms');
 
-    return $state->set($atom, $any);
+    return $atoms->set($atom, $any);
 }

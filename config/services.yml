@@ -7,3 +7,5 @@ services:
         class: Itafroma\Zork\State\OblistCollection
         calls:
             - [create, ['INITIAL']]
+    atoms:
+        class: Itafroma\Zork\State\AtomCollection

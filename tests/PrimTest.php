@@ -28,8 +28,10 @@ class PrimTest extends ZorkTest
      */
     public function testMsetg($property_key, $property_value)
     {
+        $atoms = $this->container->get('atoms');
+
         $this->assertEquals($property_value, msetg($property_key, $property_value));
-        $this->assertEquals($property_value, $this->state->get($property_key));
+        $this->assertEquals($property_value, $atoms->get($property_key));
     }
 
     /**
@@ -71,8 +73,10 @@ class PrimTest extends ZorkTest
      */
     public function testPsetg($property_key, $property_value)
     {
+        $atoms = $this->container->get('atoms');
+
         $this->assertEquals($property_value, psetg($property_key, $property_value));
-        $this->assertContains($property_key, $this->state->get('PURE-LIST'));
+        $this->assertContains($property_key, $atoms->get('PURE-LIST'));
     }
 
     /**
@@ -83,10 +87,12 @@ class PrimTest extends ZorkTest
      */
     public function testPsetgExtantKey($property_key, $property_value1, $property_value2)
     {
+        $atoms = $this->container->get('atoms');
+
         psetg($property_key, $property_value1);
 
         $this->assertEquals($property_value2, psetg($property_key, $property_value2));
-        $this->assertContains($property_key, $this->state->get('PURE-LIST'));
+        $this->assertContains($property_key, $atoms->get('PURE-LIST'));
     }
 
     /**
@@ -98,7 +104,9 @@ class PrimTest extends ZorkTest
      */
     public function testPsetgExtantKeyWithPureCareful($property_key, $property_value1, $property_value2)
     {
-        $this->state->set('PURE-CAREFUL', true);
+        $atoms = $this->container->get('atoms');
+
+        $atoms->set('PURE-CAREFUL', true);
 
         psetg($property_key, $property_value1);
         psetg($property_key, $property_value2);
@@ -112,11 +120,13 @@ class PrimTest extends ZorkTest
      */
     public function testFlagword($flags)
     {
+        $atoms = $this->container->get('atoms');
+
         $this->assertEquals(self::FLAGSIZEMAX, flagword(...$flags));
 
         $tot = 1;
         foreach ($flags as $flag) {
-            $this->assertEquals($tot, $this->state->get($flag));
+            $this->assertEquals($tot, $atoms->get($flag));
             $tot *= 2;
         }
     }
@@ -129,15 +139,16 @@ class PrimTest extends ZorkTest
      */
     public function testFlagwordGroupGlueEnabled($flags)
     {
-        $container = ServiceContainer::getContainer();
-        $oblists = $container->get('oblists');
+        $atoms = $this->container->get('atoms');
+        $oblists = $this->container->get('oblists');
+
         $initial_oblist = $oblists->get('INITIAL');
         $initial_oblist->set('GROUP-GLUE', true);
 
         flagword(...$flags);
 
         foreach ($flags as $flag) {
-            $this->assertFalse($this->state->isAssigned($flag));
+            $this->assertFalse($atoms->exists($flag));
         }
     }
 
@@ -172,10 +183,12 @@ class PrimTest extends ZorkTest
      */
     public function testMakeSlotCreate($property_key, $property_value)
     {
+        $atoms = $this->container->get('atoms');
+
         $slots = make_slot($property_key, $property_value);
 
         $this->assertInternalType('callable', $slots[$property_key]);
-        $this->assertEquals($slots[$property_key], $this->state->get('SLOTS')[$property_key]);
+        $this->assertEquals($slots[$property_key], $atoms->get('SLOTS')[$property_key]);
     }
 
     /**

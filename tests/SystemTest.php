@@ -17,16 +17,28 @@ use function Itafroma\Zork\setg;
 class SystemTest extends ZorkTest
 {
     /**
-     * Tests Itafroma\Zork\gassigned().
+     * Tests Itafroma\Zork\gassigned() when atom exists.
      *
      * @covers ::Itafroma\Zork\gassigned
      * @dataProvider propertyProvider
      */
-    function testGassigned($name, $value)
+    function testGassignedAtomExists($name, $value)
     {
         $this->assertFalse(gassigned($name));
+    }
 
-        $this->state->set($name, $value);
+    /**
+     * Tests Itafroma\Zork\gassigned() when atom does not exist.
+     *
+     * @covers ::Itafroma\Zork\gassigned
+     * @dataProvider propertyProvider
+     */
+    function testGassignedAtomDoesNotExist($name, $value)
+    {
+        $atoms = $this->container->get('atoms');
+
+        $atoms->set($name, $value);
+
         $this->assertTrue(gassigned($name));
     }
 
@@ -38,7 +50,10 @@ class SystemTest extends ZorkTest
      */
     function testGval($name, $value)
     {
-        $this->state->set($name, $value);
+        $atoms = $this->container->get('atoms');
+
+        $atoms->set($name, $value);
+
         $this->assertEquals($value, gval($name));
     }
 
@@ -90,8 +105,10 @@ class SystemTest extends ZorkTest
      */
     function testSetg($name, $value)
     {
+        $atoms = $this->container->get('atoms');
+
         $this->assertEquals($value, setg($name, $value));
-        $this->assertEquals($value, $this->state->get($name));
+        $this->assertEquals($value, $atoms->get($name));
     }
 
     /**
