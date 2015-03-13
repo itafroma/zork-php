@@ -16,7 +16,7 @@ class ServiceContainer
     const DEFAULT_CONFIG = __DIR__ . '/../config/';
 
     /**
-     * Retrieves a the service container, ensuring only one instance exists.
+     * Retrieves the service container, ensuring only one instance exists.
      *
      * @param boolean $reset Creates a new service container, destroying the old one.
      * @param string $config_file The path to the YAML configuration file defining the service container.
