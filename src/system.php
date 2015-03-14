@@ -7,7 +7,6 @@
 
 namespace Itafroma\Zork;
 
-use Itafroma\Zork\State\GlobalState;
 use Itafroma\Zork\State\Oblist;
 use Itafroma\Zork\Exception\OblistAtomExistsException;
 

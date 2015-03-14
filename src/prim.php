@@ -16,7 +16,6 @@ use Itafroma\Zork\Exception\FlagwordException;
 use Itafroma\Zork\Exception\PsetgDuplicateException;
 use Itafroma\Zork\Exception\SlotNameAlreadyUsedException;
 use Itafroma\Zork\Prim\Struc;
-use Itafroma\Zork\State\GlobalState;
 use \BadFunctionCallException;
 
 /**
