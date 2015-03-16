@@ -4,15 +4,13 @@
  * @file
  * Room structure definition.
  *
- * @see Itafroma\Zork\Prim\Struc
+ * @see Itafroma\Zork\Struc\StrucInterface
  * @see Itafroma\Zork\newstruc()
  */
 
-namespace Itafroma\Zork\Defs;
+namespace Itafroma\Zork\Struc;
 
-use Itafroma\Zork\Prim\Struc;
-
-class Room implements Struc
+class Room implements StrucInterface
 {
     /** @var string $rid Room ID */
     public $rid;
@@ -26,7 +24,7 @@ class Room implements Struc
     /** @var EXIT $rexits List of exits */
     public $rexits;
 
-    /** @var Itafroma\Zork\Defs\Object[] $robjs Objects in room */
+    /** @var Itafroma\Zork\Struc\Object[] $robjs Objects in room */
     public $robjs;
 
     /** @var RAPPLIC $raction Room-action */

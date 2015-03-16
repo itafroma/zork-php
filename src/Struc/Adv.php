@@ -4,15 +4,13 @@
  * @file
  * Adventurer structure definition.
  *
- * @see Itafroma\Zork\Prim\Struc
+ * @see Itafroma\Zork\Struc\StrucInterface
  * @see Itafroma\Zork\newstruc()
  */
 
-namespace Itafroma\Zork\Defs;
+namespace Itafroma\Zork\Struc;
 
-use Itafroma\Zork\Prim\Struc;
-
-class Adv implements Struc
+class Adv implements StrucInterface
 {
     /** @var ROOM $room Where the adventurer is */
     public $aroom;
@@ -20,10 +18,10 @@ class Adv implements Struc
     /** @var <LIST [REST OBJECT]> $aobjs What the adventurer is carrying */
     public $aobjs;
 
-    /** @var Itafroma\Zork\Defs\Object|boolean $avehicle What the adventurer is riding in */
+    /** @var Itafroma\Zork\Struc\Object|boolean $avehicle What the adventurer is riding in */
     public $avehicle = false;
 
-    /** @var Itafroma\Zork\Defs\Object $aobj What the adventurer is */
+    /** @var Itafroma\Zork\Struc\Object $aobj What the adventurer is */
     public $aobj;
 
     /** @var RAPPLIC $aaction Special action for robot, etc. */
@@ -35,7 +33,7 @@ class Adv implements Struc
     /**
      * @var int $aflags Flags
      *
-     * This must be the same offset as \Itafroma\Zork\Defs\Object::$oflags.
+     * This must be the same offset as \Itafroma\Zork\Struc\Object::$oflags.
      */
     public $aflags;
 }

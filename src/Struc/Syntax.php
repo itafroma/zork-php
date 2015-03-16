@@ -4,15 +4,13 @@
  * @file
  * Syntax structure definition.
  *
- * @see Itafroma\Zork\Prim\Struc
+ * @see Itafroma\Zork\Struc\StrucInterface
  * @see Itafroma\Zork\newstruc()
  */
 
-namespace Itafroma\Zork\Defs;
+namespace Itafroma\Zork\Struc;
 
-use Itafroma\Zork\Prim\Struc;
-
-class Syntax implements Struc
+class Syntax implements StrucInterface
 {
     /** @var VARG $syn1 Direct object, more or less */
     public $syn1;

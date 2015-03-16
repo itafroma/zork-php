@@ -7,11 +7,11 @@
 
 namespace Itafroma\Zork;
 
-use Itafroma\Zork\Defs\Adv;
-use Itafroma\Zork\Defs\Object;
-use Itafroma\Zork\Defs\Room;
-use Itafroma\Zork\Defs\Syntax;
-use Itafroma\Zork\Prim\Struc;
+use Itafroma\Zork\Struc\Adv;
+use Itafroma\Zork\Struc\Object;
+use Itafroma\Zork\Struc\Room;
+use Itafroma\Zork\Struc\Syntax;
+use Itafroma\Zork\Struc\StrucInterface;
 use \InvalidArgumentException;
 use function Itafroma\Zork\flagword;
 use function Itafroma\Zork\make_slot;
@@ -114,7 +114,7 @@ flagword(...[
 /**
  * Test a bit in the SFLAGs slot of a SYNTAX
  *
- * @param Itafroma\Zork\Defs\Syntax $s   The syntax to test
+ * @param Itafroma\Zork\Struc\Syntax $s   The syntax to test
  * @param int                       $bit The bit to test
  * @return boolean FALSE if bit is set, TRUE otherwise
  */
@@ -125,13 +125,13 @@ function strnn(Syntax $s, $bit) {
 /**
  * Retrieves an object property.
  *
- * @param Itafroma\Zork\Prim\Struc $o The object to access.
- * @param mixed                    $p The property to retrieve.
+ * @param Itafroma\Zork\Struc\StrucInterface $o The object to access.
+ * @param mixed                              $p The property to retrieve.
  * @return mixed The property value.
  */
-function oget(Struc $o, $p) {
+function oget(StrucInterface $o, $p) {
     if (!($o instanceof Object || $o instanceof Room)) {
-        throw new InvalidArgumentException('$o must be of type Itafroma\Zork\Defs\Object or Itafroma\Zorks\Defs\Room');
+        throw new InvalidArgumentException('$o must be of type Itafroma\Zork\Struc\Object or Itafroma\Zorks\Struc\Room');
     }
 
     $v = ($o instanceof Object) ?  $o->oprops : $o->rprops;
@@ -146,13 +146,13 @@ function oget(Struc $o, $p) {
 /**
  * Sets an object property.
  *
- * @param Itafroma\Zork\Prim\Struc $o The object to modify.
- * @param mixed                    $p The property to modify.
- * @param mixed                    $x The value to set.
+ * @param Itafroma\Zork\Struc\StrucInterface $o The object to modify.
+ * @param mixed                              $p The property to modify.
+ * @param mixed                              $x The value to set.
  */
-function oput(Struc $o, $p, $x, $add = true) {
+function oput(StrucInterface $o, $p, $x, $add = true) {
     if (!($o instanceof Object || $o instanceof Room)) {
-        throw new InvalidArgumentException('$o must be of type Itafroma\Zork\Defs\Object or Itafroma\Zork\Defs\Room');
+        throw new InvalidArgumentException('$o must be of type Itafroma\Zork\Struc\Object or Itafroma\Zork\Struc\Room');
     }
 
     $v = ($o instanceof Object) ? $o->oprops : $o->rprops;

@@ -7,8 +7,8 @@
 namespace Itafroma\Zork\Tests;
 
 use Itafroma\Zork\ServiceContainer;
-use Itafroma\Zork\Defs\Object;
-use Itafroma\Zork\Defs\Room;
+use Itafroma\Zork\Struc\Object;
+use Itafroma\Zork\Struc\Room;
 use \PHPUnit_Framework_TestCase;
 use \ReflectionObject;
 
@@ -89,7 +89,7 @@ abstract class ZorkTest extends PHPUnit_Framework_TestCase
         $properties = $this->propertyProvider();
 
         foreach ($properties as &$property) {
-            array_unshift($property, $this->getMockBuilder('Itafroma\Zork\Prim\Struc')->getMock());
+            array_unshift($property, $this->getMockBuilder('Itafroma\Zork\Struc\StrucInterface')->getMock());
         }
 
         return $properties;

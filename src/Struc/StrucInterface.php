@@ -11,8 +11,8 @@
  * @see Itafroma\Zork\newstruc()
  */
 
-namespace Itafroma\Zork\Prim;
+namespace Itafroma\Zork\Struc;
 
-interface Struc
+interface StrucInterface
 {
 }

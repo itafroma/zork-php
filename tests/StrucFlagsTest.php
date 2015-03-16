@@ -7,10 +7,10 @@
 
 namespace Itafroma\Zork\Tests;
 
-use Itafroma\Zork\Defs\Adv;
-use Itafroma\Zork\Defs\Object;
-use Itafroma\Zork\Defs\Room;
-use Itafroma\Zork\Defs\Syntax;
+use Itafroma\Zork\Struc\Adv;
+use Itafroma\Zork\Struc\Object;
+use Itafroma\Zork\Struc\Room;
+use Itafroma\Zork\Struc\Syntax;
 use \PHPUnit_Framework_TestCase;
 use function Itafroma\Zork\atrz;
 use function Itafroma\Zork\atro;
