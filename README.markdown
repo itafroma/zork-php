@@ -54,7 +54,7 @@ Where applicable, the ported source code is copyright © 2015 Mark Trapp. All ri
 [2]: https://github.com/itafroma/zork-mdl "Source code repository for MDL Zork"
 [3]: http://en.wikipedia.org/wiki/MDL_(programming_language) "Wikipedia article on MDL"
 [4]: http://er.jsc.nasa.gov/seh/ricetalk.htm "Transcript of JFK's Moon Speech at Rice Stadium in 1962"
-[5]: http://marktrapp.com/blog/2015/01/27/porting-zork-part-1/ "Porting Zork — Part 1: Introduction"
+[5]: https://marktrapp.com/blog/2015/01/27/porting-zork-part-1/ "Porting Zork — Part 1: Introduction"
 [6]: http://semver.org "Semantic Versioning website"
 [7]: https://getcomposer.org "Composer website"
 [8]: https://packagist.org "Packagist website"

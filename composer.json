@@ -2,7 +2,7 @@
     "name": "itafroma/zork",
     "description": "Port of MIT's version of Zork from the original MDL source.",
     "keywords": ["game", "Zork", "MDL"],
-    "homepage": "http://marktrapp.com/projects/zork",
+    "homepage": "https://marktrapp.com/projects/zork",
     "license": "MIT",
     "authors": [
         {
@@ -24,7 +24,7 @@
         {
             "name": "Mark Trapp",
             "email": "mark@marktrapp.com",
-            "homepage": "http://marktrapp.com",
+            "homepage": "https://marktrapp.com",
             "role": "Porter"
         }
     ],
