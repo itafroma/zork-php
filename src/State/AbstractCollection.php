@@ -14,7 +14,7 @@ abstract class AbstractCollection implements CollectionInterface
     /**
      * Creates a new atom within the collection.
      *
-     * @param string $atom The name of the atom to create.
+     * @param string $name The name of the atom to create.
      * @return mixed The atom created.
      */
     public function create($name)

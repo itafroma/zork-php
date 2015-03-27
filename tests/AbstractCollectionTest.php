@@ -43,7 +43,7 @@ class AbstractCollectionTest extends ZorkTest
      * @covers Itafroma\Zork\State\AbstractCollection::get
      * @dataProvider abstractCollectionPropertyProvider
      */
-    public function testGetAtomDoesNotExist($abstract_collection, $property_name, $property_value)
+    public function testGetAtomDoesNotExist($abstract_collection, $property_name)
     {
         $this->assertFalse($abstract_collection->get($property_name));
     }

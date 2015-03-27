@@ -22,7 +22,7 @@ class SystemTest extends ZorkTest
      * @covers ::Itafroma\Zork\gassigned
      * @dataProvider propertyProvider
      */
-    function testGassignedAtomExists($name, $value)
+    public function testGassignedAtomExists($name)
     {
         $this->assertFalse(gassigned($name));
     }
@@ -33,7 +33,7 @@ class SystemTest extends ZorkTest
      * @covers ::Itafroma\Zork\gassigned
      * @dataProvider propertyProvider
      */
-    function testGassignedAtomDoesNotExist($name, $value)
+    public function testGassignedAtomDoesNotExist($name, $value)
     {
         $atoms = $this->container->get('atoms');
 
@@ -48,7 +48,7 @@ class SystemTest extends ZorkTest
      * @covers ::Itafroma\Zork\gval
      * @dataProvider propertyProvider
      */
-    function testGval($name, $value)
+    public function testGval($name, $value)
     {
         $atoms = $this->container->get('atoms');
 
@@ -63,7 +63,7 @@ class SystemTest extends ZorkTest
      * @covers ::Itafroma\Zork\insert
      * @dataProvider oblistPropertyProvider
      */
-    function testInsert($oblist, $name, $value)
+    public function testInsert($oblist, $name, $value)
     {
         $return = insert($value, $name, $oblist);
         $this->assertEquals($value, $return);
@@ -77,7 +77,7 @@ class SystemTest extends ZorkTest
      * @dataProvider oblistPropertyProvider
      * @expectedException Itafroma\Zork\Exception\OblistAtomExistsException
      */
-    function testInsertDuplicate($oblist, $name, $value)
+    public function testInsertDuplicate($oblist, $name, $value)
     {
         $oblist->set($name, $value);
 
@@ -90,7 +90,7 @@ class SystemTest extends ZorkTest
      * @covers ::Itafroma\Zork\lookup
      * @dataProvider oblistPropertyProvider
      */
-    function testLookup($oblist, $name, $value)
+    public function testLookup($oblist, $name, $value)
     {
         $oblist->set($name, $value);
 
@@ -103,7 +103,7 @@ class SystemTest extends ZorkTest
      * @covers ::Itafroma\Zork\setg
      * @dataProvider propertyProvider
      */
-    function testSetg($name, $value)
+    public function testSetg($name, $value)
     {
         $atoms = $this->container->get('atoms');
 
@@ -114,7 +114,7 @@ class SystemTest extends ZorkTest
     /**
      * Provides an oblist and property key-value.
      */
-    function oblistPropertyProvider()
+    public function oblistPropertyProvider()
     {
         $properties = $this->propertyProvider();
 

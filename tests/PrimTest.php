@@ -244,6 +244,7 @@ class PrimTest extends ZorkTest
     {
         // Subtracting one is done to account for the off-by-one bug replicated
         // in \Itafroma\Zork\flagword().
+        $flags = [];
         for ($i = 0; $i < $size - 1; ++$i) {
             $flags[] = 'ZorkTest-flag-' . $i;
         }
