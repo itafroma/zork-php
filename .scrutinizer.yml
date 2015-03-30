@@ -23,10 +23,12 @@ checks:
 
 coding_style:
     php:
+        spaces:
+            around_operators:
+                concatenation: true
         braces:
             classes_functions:
                 class: new-line
-                function: end-of-line
                 closure: end-of-line
             if:
                 opening: end-of-line
