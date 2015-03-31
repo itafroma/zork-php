@@ -15,6 +15,4 @@ before_script:
 
 script: ./vendor/bin/phpunit --configuration config/phpunit.xml.dist
 
-after_script:
-  - wget https://scrutinizer-ci.com/ocular.phar
-  - php ocular.phar code-coverage:upload --format=php-clover ./build/logs/coverage/clover.xml
+after_script: ./bin/scrutinizer.sh
