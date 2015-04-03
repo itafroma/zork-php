@@ -93,8 +93,7 @@ class AbstractCollectionTest extends ZorkTest
     {
         $properties = $this->propertyProvider();
 
-        foreach ($properties as &$property)
-        {
+        foreach ($properties as &$property) {
             $stub = $this->getMockForAbstractClass(AbstractCollection::class);
             array_unshift($property, $stub);
         }

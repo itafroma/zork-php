@@ -10,8 +10,8 @@ namespace Itafroma\Zork;
 use Itafroma\Zork\Struc\Adv;
 use Itafroma\Zork\Struc\Object;
 use Itafroma\Zork\Struc\Room;
-use Itafroma\Zork\Struc\Syntax;
 use Itafroma\Zork\Struc\StrucInterface;
+use Itafroma\Zork\Struc\Syntax;
 use \InvalidArgumentException;
 use function Itafroma\Zork\flagword;
 use function Itafroma\Zork\make_slot;
@@ -134,7 +134,7 @@ function oget(StrucInterface $o, $p) {
         throw new InvalidArgumentException('$o must be of type Itafroma\Zork\Struc\Object or Itafroma\Zorks\Struc\Room');
     }
 
-    $v = ($o instanceof Object) ?  $o->oprops : $o->rprops;
+    $v = ($o instanceof Object) ? $o->oprops : $o->rprops;
 
     if (empty($v)) {
         return null;

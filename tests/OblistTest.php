@@ -74,5 +74,5 @@ class OblistTest extends ZorkTest
         }
 
         return $properties;
-   }
+    }
 }
