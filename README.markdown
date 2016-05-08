@@ -50,6 +50,16 @@ The original *Zork* source code is copyright © 1978 Massachusetts Institute of 
 
 Where applicable, the ported source code is copyright © 2015 Mark Trapp. All rights reserved. The ported code is made available under the MIT license. A copy of the license can be found in the `LICENSE` file.
 
+## Development disclaimer
+
+This a personal project in its early stages of development and planning. It is not ready for collaboration or a guarantee of fitness. It's being made available for transparency (and so I have something to point to when I want to talk about it), but be warned that:
+
+- Support requests via GitHub issues or email will go unanswered and ignored
+- Pull requests will be summarily rejected
+- Public progress may be minimal to non-existent for long stretches at a time
+
+You're welcome to use what's here under the terms of its license (if one is available) or the principles of fair use (if one is not). If you like the idea/premise behind this project, I would suggest starting over the way you'd want to do it yourself as I am very unlikely to accept future contributions forked off of, or derived from, this project's current stage of development.
+
 [1]: http://en.wikipedia.org/wiki/Zork "Wikipedia article on Zork"
 [2]: https://github.com/itafroma/zork-mdl "Source code repository for MDL Zork"
 [3]: http://en.wikipedia.org/wiki/MDL_(programming_language) "Wikipedia article on MDL"
